@@ -47,8 +47,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 %{_datadir}/%{name}/input/*
 %{_datadir}/%{name}/output/*
-%exclude %{_datadir}/%{name}/input/.svn/*
-%exclude %{_datadir}/%{name}/output/.svn/*
 
 %changelog
 * Wed Aug 6 2014 Mark Piper <mark.piper@colorado.edu>
