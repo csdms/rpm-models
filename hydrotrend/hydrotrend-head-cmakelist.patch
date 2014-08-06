@@ -1,0 +1,51 @@
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 93)
++++ CMakeLists.txt	(working copy)
+@@ -12,6 +12,9 @@
+ 
+ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/hydrotrend.pc.cmake ${CMAKE_CURRENT_SOURCE_DIR}/hydrotrend.pc )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ if (WITH_CTEST)
+ 
+ include (CTest)
+@@ -80,7 +83,7 @@
+ target_link_libraries( hydrotrend m )
+ 
+ #set_target_properties(hydrotrend PROPERTIES VERSION 4.2.0 SOVERSION 4)
+-install(TARGETS hydrotrend DESTINATION lib COMPONENT hydrotrend)
++install(TARGETS hydrotrend DESTINATION ${LIB_DIR} COMPONENT hydrotrend)
+ export(TARGETS hydrotrend FILE hydrotrend-exports.cmake)
+ 
+ ########### hydrotrend main program ###############
+@@ -121,7 +124,7 @@
+ 
+   install (FILES ${CMAKE_BINARY_DIR}/hydrotrend_mod.py
+                  ${CMAKE_BINARY_DIR}/_hydrotrend_mod.so
+-           DESTINATION lib/hydrotrend-python COMPONENT hydrotrend)
++           DESTINATION ${LIB_DIR}/hydrotrend-python COMPONENT hydrotrend)
+ 
+ endif (WITH_PYTHON_BINDINGS AND PYTHONLIBS_FOUND AND SWIG_FOUND)
+ 
+@@ -133,7 +136,9 @@
+ install(FILES  hydrotrend_api.h RENAME bmi_hydrotrend.h
+         DESTINATION include
+         COMPONENT hydrotrend)
+-install(FILES  hydrotrend.pc DESTINATION lib/pkgconfig  COMPONENT hydrotrend)
++install(FILES  hydrotrend.pc 
++        DESTINATION ${LIB_DIR}/pkgconfig  
++	COMPONENT hydrotrend)
+ 
+ ########### Configuration Information ###############
+ 
+@@ -155,6 +160,7 @@
+ message("  Host System Type:           ${CMAKE_HOST_SYSTEM}")
+ message("  Installation architecture:  ${CMAKE_SYSTEM}")
+ message("  Install path:               ${CMAKE_INSTALL_PREFIX}")
++message("  Lib directory:              ${LIB_DIR}")
+ message("  With doxygen:               ${DOXYGEN}")
+ message("")
+ message("------------------------------------------------------------------------")
