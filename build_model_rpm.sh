@@ -13,14 +13,14 @@
 # Mark Piper (mark.piper@colorado.edu)
 
 # Check that the packages required to build an RPM are present on the system.
-required="rpm-build rpmdevtools rpmlint subversion cmake gcc gcc-c++"
-for package in $required; do
-    if ! rpm -q --quiet $package; then
-	echo "The package '$package' is required. Install it with:"
-        echo "$ sudo yum install $package"
-	exit 1 # package not present
-    fi
-done
+#required="rpm-build rpmdevtools rpmlint subversion cmake gcc gcc-c++"
+#for package in $required; do
+#    if ! rpm -q --quiet $package; then
+#	echo "The package '$package' is required. Install it with:"
+#        echo "$ sudo yum install $package"
+#	exit 1 # package not present
+#    fi
+#done
 
 # Store the directory from which this script is called. This will be
 # used to reference relative directories.
