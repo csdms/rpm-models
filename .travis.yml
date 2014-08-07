@@ -1,11 +1,10 @@
 language: bash
 
 before_script:
-  - uname -a
   - sudo apt-get install rpm
   - rpmbuild --version
   - svn --version --quiet
   - cmake --version
 
 script:
-  - bash build_model_rpm.sh
+  - bash build_model_rpm.sh -h
