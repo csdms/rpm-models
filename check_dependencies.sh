@@ -25,7 +25,7 @@ if $debian; then
     required="$required g++"
     install_msg="$ sudo apt-get install"
     for package in $required; do
-	if ! dpkg -W $package; then
+	if ! dpkg-query -W $package; then
 	    required_msg
 	    exit 1 # package not present
 	fi
