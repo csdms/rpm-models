@@ -1,10 +1,8 @@
 language: bash
 
 before_script:
-  - sudo apt-get install rpm
+  - sudo apt-get install -qq rpm
   - rpmbuild --version
-  - svn --version --quiet
-  - cmake --version
 
 script:
   - bash check_dependencies.sh
