@@ -7,4 +7,5 @@ before_script:
   - cmake --version
 
 script:
+  - bash check_dependencies.sh
   - bash build_model_rpm.sh -h
