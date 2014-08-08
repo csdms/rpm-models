@@ -81,9 +81,9 @@ $topdir/$model/get_source.sh
 # Change to rpmbuild/SOURCES. Make a tarball from the source.
 echo "Making $model tarball"
 cd $HOME/rpmbuild/SOURCES
-mv trunk/ $model-$tag/
-tar -zcf $model-$tag.tar.gz $model-$tag/
-rm -rf $model-$tag/
+mv trunk $model-$tag
+tar -zcf $model-$tag.tar.gz $model-$tag
+rm -rf $model-$tag
 
 # Place the patch(es) (if any) for the model in rpmbuild/SOURCES.
 echo "Applying patches"
