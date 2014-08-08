@@ -8,6 +8,8 @@ install:
 
 before_script:
   - rpmbuild --version
+  - sudo mkdir -p /etc/rpm
+  - sudo cp config/macros.cmake /etc/rpm
 
 script:
   - bash check_dependencies.sh
