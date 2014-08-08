@@ -1,7 +1,12 @@
 language: bash
 
-before_script:
+install: 
   - sudo apt-get install -qq rpm
+  - wget https://fedorahosted.org/releases/r/p/rpmdevtools/rpmdevtools-6.8.tar.bz2
+  - tar -jxf rpmdevtools-6.8.tar.bz2
+  - cd rpmdevtools-6.8 && ./configure --prefix=/usr && make && make install
+
+before_script:
   - rpmbuild --version
 
 script:
