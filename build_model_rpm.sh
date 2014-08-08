@@ -1,4 +1,5 @@
 #! /bin/bash
+#
 # Builds binary and source RPMs for a model in the CSDMS repository.
 #
 # Arguments:
@@ -7,20 +8,10 @@
 #   -h shows the help message
 #
 # Usage:
-#   $ ./build_model_rpm.sh -m hydrotrend -t 3.0.2
-#   $ ./build_model_rpm.sh -h
+#   $ bash build_model_rpm.sh -m hydrotrend -t 3.0.2
+#   $ bash build_model_rpm.sh -h
 #
 # Mark Piper (mark.piper@colorado.edu)
-
-# Check that the packages required to build an RPM are present on the system.
-#required="rpm-build rpmdevtools rpmlint subversion cmake gcc gcc-c++"
-#for package in $required; do
-#    if ! rpm -q --quiet $package; then
-#	echo "The package '$package' is required. Install it with:"
-#        echo "$ sudo yum install $package"
-#	exit 1 # package not present
-#    fi
-#done
 
 # Store the directory from which this script is called. This will be
 # used to reference relative directories.
@@ -28,7 +19,7 @@
 topdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Help text.
-help="Usage: arguments_ex [-m <model name>] [-t <model tag>]"
+help="Usage: bash build_model_rpm [-m <model name>] [-t <model tag>]"
 
 # Get arguments, parse into variables.
 while getopts ":m:t:h" opt; do
