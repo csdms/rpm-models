@@ -74,13 +74,13 @@ fi
 echo "Setting up rpmbuild directory structure"
 test -d $HOME/rpmbuild && rpmdev-wipetree || rpmdev-setuptree
 
-# Change to rpmbuild/SOURCES. Get the (exported) model source from CSDMS.
+# Get the (exported) model source from CSDMS.
 echo "Getting $model source"
-cd $HOME/rpmbuild/SOURCES
-svn export --quiet https://csdms.colorado.edu/svn/$model/trunk
+$topdir/$model/get_source.sh
 
-# Make a tarball from the source.
+# Change to rpmbuild/SOURCES. Make a tarball from the source.
 echo "Making $model tarball"
+cd $HOME/rpmbuild/SOURCES
 mv trunk/ $model-$tag/
 tar -zcf $model-$tag.tar.gz $model-$tag/
 rm -rf $model-$tag/
