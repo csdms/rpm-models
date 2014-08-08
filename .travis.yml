@@ -11,4 +11,4 @@ before_script:
 
 script:
   - bash check_dependencies.sh
-  - bash build_model_rpm.sh -h
+  - bash build_model_rpm.sh -m hydrotrend
