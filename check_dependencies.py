@@ -19,23 +19,27 @@ class CheckDependencies:
     Checks the dependencies for building an RPM for a given model.
     '''
     def __init__(self, model_name):
+        self.dirname = os.path.dirname(os.path.realpath(__file__))
         self.model_name = model_name
         self.debian_check()
 
         # Read dependencies for all models.
+        self.dependencies_file = self.dirname
         if self.is_debian:
-            self.dependencies_file = "config/dependencies_debian.txt"
+            self.dependencies_file += "/config/dependencies_debian.txt"
             self.distro = "Debian"
             self.package_tool = "apt-get"
         else:
-            self.dependencies_file = "config/dependencies.txt"
+            self.dependencies_file += "/config/dependencies.txt"
             self.distro = "RHEL"
             self.package_tool = "yum"
         self.dependencies = self.read(self.dependencies_file)
 
         # Read additional dependencies for the requested model.
         if self.model_name != None:
-            self.model_dependencies_file = self.model_name + "/dependencies.txt"
+            self.model_dependencies_file = self.dirname \
+                                           + "/" + self.model_name \
+                                           + "/dependencies.txt"
             if os.path.isfile(self.model_dependencies_file):
                 subdependencies = self.read(self.model_dependencies_file)
                 self.dependencies.extend(subdependencies)
