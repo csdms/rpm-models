@@ -1,0 +1,6 @@
+# Build dependencies for Debian-compatible distributions
+rpm
+cmake
+gcc
+g++
+subversion

@@ -1,0 +1,8 @@
+# Build dependencies for RHEL-compatible distributions
+cmake
+gcc
+gcc-c++
+subversion
+rpm-build
+rpmdevtools
+rpmlint
