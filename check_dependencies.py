@@ -16,7 +16,7 @@ import argparse
 
 class CheckDependencies:
     '''
-    Checks dependencies for building an RPM for a given model.
+    Checks the dependencies for building an RPM for a given model.
     '''
     def __init__(self, model_name):
         self.model_name = model_name
@@ -40,7 +40,7 @@ class CheckDependencies:
                 subdependencies = self.read(self.model_dependencies_file)
                 self.dependencies.extend(subdependencies)
 
-        # Check that the dependencies are met.
+        # Check that all the dependencies are met.
         self.check()
         print("All required packages are installed.")
 
@@ -52,7 +52,8 @@ class CheckDependencies:
 
     def read(self, fname):
         '''
-        Reads a list of package names, as strings, from a file.
+        Reads a list of required package names, as strings, from the given
+        text file.
         '''
         with open(fname, "r") as f:
             deps = f.read().split("\n")
@@ -60,24 +61,24 @@ class CheckDependencies:
         deps.pop()  # last items from list
         return deps
 
-    def check_with_package_tool(self, package):
+    def query_package_tool(self, package):
         '''
-        Calls the distro-specific package tool to check whether the given
+        Calls the distro-specific package tool to query whether the given
         package is installed.
         '''
         if self.is_debian:
             return call(["dpkg-query", "-W", package])
         else:
+            print(" - " + package)
             return call(["rpm", "-q", "--quiet", package])
 
     def check(self):
         '''
-        Checks for required packages.
+        Performs the checks for the required packages.
         '''
         print("Checking " + self.distro + "-compatible dependencies:")
         for package in self.dependencies:
-            print(" - " + package)
-            ret = self.check_with_package_tool(package)
+            ret = self.query_package_tool(package)
             if ret > 0:
                 print("The package '" + package + "' is required. "
                       "Install it with:\n$ sudo " + self.package_tool
