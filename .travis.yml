@@ -12,5 +12,5 @@ before_script:
   - sudo cp config/macros.cmake /etc/rpm
 
 script:
-  - bash check_dependencies.sh
+  - python check_dependencies.py --model "hydrotrend"
   - bash build_model_rpm.sh -m hydrotrend

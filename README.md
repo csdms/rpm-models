@@ -5,12 +5,12 @@ Scripts for building binary and source RPMs for CSDMS models.
 
 **Preparation**
 
-Optionally call `check_dependencies.sh` to ensure
-that all the packages needed to build an RPM
+Optionally call the Python script `check_dependencies.py`
+to ensure that all the packages needed to build an RPM
 are installed on your machine:
 
 ```bash
-$ bash check_dependencies.sh
+$ python check_dependencies.py --model hydrotrend
 ```
 
 Be sure to install any required packages.
