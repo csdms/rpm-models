@@ -15,4 +15,4 @@ script:
   - python check_dependencies.py --help               # check help flag
   - python check_dependencies.py                      # check default
   - python check_dependencies.py --model "hydrotrend" # check model flag
-  - bash build_model_rpm.sh -m hydrotrend
+  - python build_model_rpm.py --model hydrotrend
