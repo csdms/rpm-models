@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/csdms/rpm-models.svg?branch=master)](https://travis-ci.org/csdms/rpm-models)
+
 rpm-models
 ==========
 
