@@ -13,9 +13,11 @@
 #
 # Mark Piper (mark.piper@colorado.edu)
 
-import sys, os
+import sys, os, shutil
 import argparse
 from subprocess import call
+import string
+import glob
 
 class BuildModelRPM:
     '''
@@ -35,16 +37,12 @@ class BuildModelRPM:
 
         self.model = model_name            
         self.version = "head" if model_version == None else model_version
-        #print(self.model, self.version)
 
         # Set up the rpmbuild directory.
-        self.rpmbuild = os.path.expanduser("~") + os.sep + "rpmbuild" + os.sep
-        #print(self.rpmbuild)
+        self.rpmbuild = os.getenv("HOME") + os.sep + "rpmbuild" + os.sep
         self.prep_directory()
 
         # Download the model's source code.
-        self.sources_dir = self.rpmbuild + "SOURCES" + os.sep
-        self.source = self.sources_dir + "source.txt"
         self.get_source()
 
         # Make a tarball from the model's source.
@@ -55,41 +53,64 @@ class BuildModelRPM:
 
         # Build the binary and source RPMs.
         self.build()
+        print("Success!")
 
     def prep_directory(self):
         '''
-        Prepares the RPM build directory using built-in RPM dev tools.
+        Prepares the RPM build directory with built-in RPM dev tools.
+        Sets up member variables for paths in the build directory.
         '''
         print("Setting up rpmbuild directory structure.")
         if os.path.isdir(self.rpmbuild):
             call(["rpmdev-wipetree"])
         else:
             call(["rpmdev-setuptree"])
+        self.sources = self.rpmbuild + "SOURCES" + os.sep
+        self.specs = self.rpmbuild + "SPECS" + os.sep
 
     def get_source(self):
         '''
         Retrieves the model source from an external repository.
         '''
         print("Getting " + self.model + " source.")
+        self.source_target = self.sources + self.model + "-" + self.version
+        with open(self.topdir + self.model + os.sep + "source.txt", "r") as f:
+            cmd = f.readline().strip()
+        cmd += " " + self.source_target
+        ret = call(cmd, shell=True)
+        if ret != 0:
+            print("Unable to download model source.")
+            sys.exit(4) # can't access source
 
     def make_tarball(self):
         '''
         Makes a tarball (required by rpmbuild) from the model's source.
         '''
         print("Making tarball.")
+        shutil.make_archive(self.source_target, 'gztar', self.sources, \
+                            os.path.basename(self.source_target))
+        shutil.rmtree(self.source_target)
 
     def patch(self):
         '''
-        Includes patches for the build process.
+        Locates and includes patches (if any) for the build process. 
+        Patches must use the extension ".patch".
         '''
         print("Applying patches.")
+        for patch in glob.glob(self.topdir + self.model + os.sep + "*.patch"):
+            shutil.copy(patch, self.sources)
 
     def build(self):
         '''
         Build binary and source RPMS.
         '''
         print("Building RPMs.")
-
+        spec_file = self.model + ".spec"
+        shutil.copy(self.topdir + self.model + os.sep + spec_file, self.specs)
+        ret = call(["rpmbuild", "-ba", self.specs + spec_file])
+        if ret != 0:
+            print("Error in building model RPM.")
+            sys.exit(5) # can't build RPM
 
 #-----------------------------------------------------------------------------
 
