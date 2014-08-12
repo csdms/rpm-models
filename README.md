@@ -3,9 +3,18 @@ rpm-models
 
 Scripts for building binary and source RPMs for CSDMS models.
 
+**Requirements**
+
+These Python scripts are designed to run on Linux
+(various RHEL and Debian flavors have been tested).
+To install CSDMS models on Mac OS X,
+please see the
+[csdms/homebrew-models](https://github.com/csdms/homebrew-models)
+project.
+
 **Preparation**
 
-Optionally call the Python script `check_dependencies.py`
+Call `check_dependencies.py`
 to ensure that all the packages needed to build an RPM
 are installed on your machine:
 
@@ -13,21 +22,21 @@ are installed on your machine:
 $ python check_dependencies.py --model hydrotrend
 ```
 
-Be sure to install any required packages.
+Be sure to install any required packages before proceeding.
 
 **Building a package**
 
 To create RPMs for a model,
-call the bash script `build_model_rpm.sh` with the model name and 
+call `build_model_rpm.py` with the model name and 
 version tag as parameters:
 
 ```bash
-$ bash build_model_rpm.sh -m hydrotrend -t head
+$ python build_model_rpm.py --model hydrotrend --tag head
 ```
 
 This script
 downloads the tagged version of the specified model from the
-CSDMS repository,
+CSDMS repository (the default is the HEAD revision of the trunk),
 then calls
 [rpmbuild](http://www.rpm.org/max-rpm-snapshot/rpmbuild.8.html)
 to create binary and source RPMs for the model.
