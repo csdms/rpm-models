@@ -1,4 +1,6 @@
-language: bash
+language: python
+python:
+  - "2.7"
 
 install: 
   - sudo apt-get install -qq rpm
