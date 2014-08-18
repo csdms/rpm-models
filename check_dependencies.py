@@ -91,15 +91,23 @@ class CheckDependencies:
 
 #-----------------------------------------------------------------------------
 
-# Allow only Linuxen.
-if not sys.platform.startswith('linux'):
-    print("Error: this OS is not supported.")
-    sys.exit(1) # not Linux
+def main():
+    '''
+    Accepts command-line arguments and passes them to an instance of 
+    CheckDependencies.
+    '''
+    # Allow only Linuxen.
+    if not sys.platform.startswith('linux'):
+        print("Error: this OS is not supported.")
+        sys.exit(1) # not Linux
 
-# Which model is being checked?
-parser = argparse.ArgumentParser()
-parser.add_argument("-m", "--model",
-                    help="the name of the model to check")
-args = parser.parse_args()
+    # Which model is being checked?
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-m", "--model",
+                        help="the name of the model to check")
+    args = parser.parse_args()
 
-CheckDependencies(args.model)
+    CheckDependencies(args.model)
+
+if __name__ == "__main__":
+    main()
