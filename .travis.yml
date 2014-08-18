@@ -14,7 +14,5 @@ before_script:
   - sudo cp config/macros.cmake /etc/rpm
 
 script:
-  - python check_dependencies.py --help               # check help flag
-  - python check_dependencies.py                      # check default
-  - python check_dependencies.py --model "hydrotrend" # check model flag
+  - nosetests -v
   - python build_model_rpm.py --model hydrotrend
