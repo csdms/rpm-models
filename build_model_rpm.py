@@ -53,8 +53,15 @@ class BuildModelRPM:
         self.patch()
 
         # Build the binary and source RPMs.
+        self.debian_check()
         self.build()
         print("Success!")
+
+    def debian_check(self):
+        ''' 
+        True if this is a Debian-based Linux system.
+        '''
+        self.is_debian = (call(["test", "-f", "/etc/debian_version"]) == 0)
 
     def prep_directory(self):
         '''
@@ -123,8 +130,10 @@ class BuildModelRPM:
         spec_file = self.model + ".spec"
         shutil.copy(self.topdir + self.model + os.sep + spec_file, self.specs)
         cmd = "rpmbuild -ba --quiet " + self.specs + spec_file \
-            + " --define '_version " + self.version + "'" \
-            + " --define '_buildrequires " + self.read() + "'"
+            + " --define '_version " + self.version + "'"
+        if not self.is_debian:
+            cmd += " --define '_buildrequires " + self.read() + "'"
+        print(cmd)
         ret = call(shlex.split(cmd))
         if ret != 0:
             print("Error in building model RPM.")
