@@ -1,7 +1,12 @@
-# Minimum build dependencies for RHEL-compatible distributions
-subversion
+# Build dependencies for RHEL-compatible distributions
+cmake
+pkgconfig
+glib2
+glib2-devel
+ncurses-devel
 gcc
 gcc-c++
+subversion
 rpm-build
 rpmdevtools
 rpmlint

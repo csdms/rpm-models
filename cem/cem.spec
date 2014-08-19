@@ -14,7 +14,7 @@ Patch0:		cem-cmakecxx.patch
 Patch1:		cem-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 
-BuildRequires:	ncurses-devel, glib2, glib2-devel, pkgconfig, cmake
+#BuildRequires:
 #Requires:
 
 %global _waves waves
