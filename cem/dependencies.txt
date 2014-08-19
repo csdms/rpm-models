@@ -1,0 +1,5 @@
+# Build dependencies for CEM
+pkgconfig
+glib2
+glib2-devel
+ncurses-devel
