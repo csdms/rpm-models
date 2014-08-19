@@ -7,3 +7,6 @@ def test_default():
 
 def test_hydrotrend():
     CheckDependencies("hydrotrend")
+
+def test_cem():
+    CheckDependencies("cem")
