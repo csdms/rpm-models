@@ -14,7 +14,7 @@ Patch0:		cem-cmakecxx.patch
 Patch1:		cem-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 
-#BuildRequires:
+BuildRequires:	%{_buildrequires}
 #Requires:
 
 %global _waves waves

@@ -1,0 +1,7 @@
+# Packages required to build CEM.
+cmake
+ncurses-devel
+glib2
+glib2-devel
+pkgconfig
+

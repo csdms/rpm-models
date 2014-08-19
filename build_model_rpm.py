@@ -101,6 +101,20 @@ class BuildModelRPM:
         for patch in glob.glob(self.topdir + self.model + os.sep + "*.patch"):
             shutil.copy(patch, self.sources)
 
+    def read(self):
+        '''
+        Reads a list of required package names, as strings, from the
+        text file 'build_requires.txt'. 
+        '''
+        bname = "build_requires.txt"
+        fname = self.topdir + self.model + os.sep + bname
+        with open(fname, "r") as f:
+            deps = f.read().split("\n")
+        deps.pop(0) # remove first and
+        deps.pop()  # last items from list
+        sdeps = string.join(deps, ", ")
+        return sdeps
+
     def build(self):
         '''
         Build binary and source RPMS.
@@ -109,7 +123,8 @@ class BuildModelRPM:
         spec_file = self.model + ".spec"
         shutil.copy(self.topdir + self.model + os.sep + spec_file, self.specs)
         cmd = "rpmbuild -ba --quiet " + self.specs + spec_file \
-            + " --define '_version " + self.version + "'"
+            + " --define '_version " + self.version + "'" \
+            + " --define '_buildrequires " + self.read() + "'"
         ret = call(shlex.split(cmd))
         if ret != 0:
             print("Error in building model RPM.")
