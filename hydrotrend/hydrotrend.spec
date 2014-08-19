@@ -8,8 +8,8 @@ URL:		http://csdms.colorado.edu/wiki/Model:HydroTrend
 # The HydroTrend source can be checked out from the CSDMS Trac site:
 # $ svn co https://csdms.colorado.edu/svn/hydrotrend/trunk
 Source0:	%{name}-%{version}.tar.gz
-# This patch is temporary until Albert applies it upstream.
-Patch0:		hydrotrend-head-cmakelist.patch
+# This patch allows the -DLIB_SUFFIX option to CMake.
+Patch0:		hydrotrend-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 
 #BuildRequires:
