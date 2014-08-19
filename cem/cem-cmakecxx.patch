@@ -1,0 +1,31 @@
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 78)
++++ CMakeLists.txt	(working copy)
+@@ -57,7 +57,7 @@
+   deltas_cli.c
+   ndelta4.c
+   deltas_api.c)
+-set_source_files_properties (${deltas_lib_SRCS} PROPERTIES LANGUAGE CXX)
++#set_source_files_properties (${deltas_lib_SRCS} PROPERTIES LANGUAGE CXX)
+ 
+ add_library(bmicem ${deltas_lib_SRCS})
+ add_library(bmicem-static STATIC ${deltas_lib_SRCS})
+@@ -73,7 +73,7 @@
+ set (waves_lib_SRCS
+   waves_api.c
+   waves.c)
+-set_source_files_properties (${waves_lib_SRCS} PROPERTIES LANGUAGE CXX)
++#set_source_files_properties (${waves_lib_SRCS} PROPERTIES LANGUAGE CXX)
+ 
+ add_library(bmiwaves ${waves_lib_SRCS})
+ add_library(bmiwaves-static STATIC ${waves_lib_SRCS})
+@@ -85,7 +85,7 @@
+ ########### deltas main program ###############
+ 
+ set( deltas_SRCS deltas_main.c)
+-set_source_files_properties (${deltas_SRCS} PROPERTIES LANGUAGE CXX)
++#set_source_files_properties (${deltas_SRCS} PROPERTIES LANGUAGE CXX)
+ 
+ add_executable(run_deltas ${deltas_SRCS})
+ target_link_libraries(run_deltas bmicem-static)

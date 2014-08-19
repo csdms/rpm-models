@@ -1,5 +1,5 @@
 Name:		cem
-Version:	head
+Version:	%{_version}
 Release:	1%{?dist}
 Summary:	The Coastline Evolution Model from Duke University
 Group:		Applications/Engineering
@@ -8,10 +8,17 @@ URL:		http://csdms.colorado.edu/wiki/Model:CEM
 # The CEM source can be checked out from the CSDMS Trac site:
 # $ svn co https://csdms.colorado.edu/svn/cem/trunk
 Source0:	%{name}-%{version}.tar.gz
+# Patch0 turns off use of g++ in building CEM.
+Patch0:		cem-cmakecxx.patch
+# Patch1 allows the -DLIB_SUFFIX option to CMake.
+Patch1:		cem-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 
 #BuildRequires:
 #Requires:
+
+%global _waves waves
+%global _deltas deltas
 
 %description
 The Coastline Evolution Model (CEM) addresses predominately sandy,
@@ -33,9 +40,11 @@ evolution through beach nourishment or hard structures.
 
 %prep
 %setup -q
+%patch0
+%patch1
 
 %build
-%cmake .
+%cmake . -DLIB_SUFFIX=64
 make %{?_smp_mflags}
 
 %install
@@ -50,15 +59,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-# %doc FLOWCHART NEWS README
-# %{_bindir}/%{name}
-# %{_includedir}/%{name}_cli.h
-# %{_includedir}/bmi_%{name}.h
-# %{_libdir}/lib%{name}.so
-# %{_libdir}/pkgconfig/%{name}.pc
-# %{_datadir}/%{name}/input/*
-# %{_datadir}/%{name}/output/*
+%doc AUTHORS ChangeLog COPYING INSTALL NEWS README
+%{_bindir}/%{_deltas}
+%{_bindir}/%{_waves}
+%{_includedir}/bmi_%{name}.h
+%{_includedir}/bmi_%{_waves}.h
+%{_includedir}/%{_deltas}_api.h
+%{_includedir}/%{_deltas}_cli.h
+%{_includedir}/%{_waves}_cli.h
+%{_libdir}/libbmi%{name}.so
+%{_libdir}/libbmi%{_waves}.so
+%{_libdir}/pkgconfig/%{_deltas}.pc
+%{_libdir}/pkgconfig/%{_waves}.pc
+%{_datadir}/%{_deltas}/output/*
 
 %changelog
-* Tue Aug 12 2014 Mark Piper <mark.piper@colorado.edu>
-- Initial version of the package
+* Tue Aug 19 2014 Mark Piper <mark.piper@colorado.edu>
+- Set up spec file for building package

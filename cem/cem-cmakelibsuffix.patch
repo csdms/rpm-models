@@ -1,0 +1,57 @@
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 78)
++++ CMakeLists.txt	(working copy)
+@@ -10,11 +10,14 @@
+ 
+ add_subdirectory( data )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ ########### Look for glib-2.0 ###############
+ 
+ if (DEFINED CMAKE_GLIB_DIR)
+   set (ENV{PKG_CONFIG_PATH}
+-       "$ENV{PKG_CONFIG_PATH}:${CMAKE_GLIB_DIR}/lib/pkgconfig")
++       "$ENV{PKG_CONFIG_PATH}:${CMAKE_GLIB_DIR}/${LIB_DIR}/pkgconfig")
+ endif (DEFINED CMAKE_GLIB_DIR)
+ 
+ include (FindPkgConfig)
+@@ -64,7 +67,7 @@
+ target_link_libraries (bmicem m ${OPENGL_LIBRARIES})
+ target_link_libraries(bmicem-static m ${GLIB2_LIBRARIES} ${GTHREAD2_LIBRARIES})
+ 
+-install(TARGETS bmicem DESTINATION lib COMPONENT deltas)
++install(TARGETS bmicem DESTINATION ${LIB_DIR} COMPONENT deltas)
+ 
+ ########### libwaves ###############
+ 
+@@ -80,7 +83,7 @@
+ target_link_libraries (bmiwaves m glib-2.0)
+ target_link_libraries(bmiwaves-static m ${GLIB2_LIBRARIES} ${GTHREAD2_LIBRARIES})
+ 
+-install(TARGETS bmiwaves DESTINATION lib COMPONENT bmiwaves)
++install(TARGETS bmiwaves DESTINATION ${LIB_DIR} COMPONENT bmiwaves)
+ 
+ ########### deltas main program ###############
+ 
+@@ -138,7 +141,7 @@
+ 
+ install (FILES ${CMAKE_BINARY_DIR}/deltas_mod.py
+                ${CMAKE_BINARY_DIR}/_deltas_mod.so
+-         DESTINATION lib/deltas-python COMPONENT deltas)
++         DESTINATION ${LIB_DIR}/deltas-python COMPONENT deltas)
+ endif (PYTHON_BINDINGS )
+ 
+ ########### Install files ###############
+@@ -157,7 +160,7 @@
+         DESTINATION include
+         COMPONENT deltas)
+ 
+-install(FILES deltas.pc DESTINATION lib/pkgconfig  COMPONENT deltas)
+-install(FILES waves.pc DESTINATION lib/pkgconfig  COMPONENT deltas)
++install(FILES deltas.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT deltas)
++install(FILES waves.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT deltas)
+ 
+ 
