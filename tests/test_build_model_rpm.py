@@ -19,3 +19,9 @@ def test_hydrotrend_version_head():
 
 #def test_hydrotrend_tagged_version():
 #    BuildModelRPM("hydrotrend", "3.0.2")
+
+def test_cem_version_head():
+    BuildModelRPM("cem", "head")
+
+#def test_cem_tagged_version():
+#    BuildModelRPM("cem", "0.2")
