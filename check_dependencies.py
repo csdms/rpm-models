@@ -36,13 +36,13 @@ class CheckDependencies:
         self.dependencies = self.read(self.dependencies_file)
 
         # Read additional dependencies for the requested model.
-        if self.model_name != None:
-            self.model_dependencies_file = self.dirname \
-                                           + "/" + self.model_name \
-                                           + "/dependencies.txt"
-            if os.path.isfile(self.model_dependencies_file):
-                subdependencies = self.read(self.model_dependencies_file)
-                self.dependencies.extend(subdependencies)
+        # if self.model_name != None:
+        #     self.model_dependencies_file = self.dirname \
+        #                                    + "/" + self.model_name \
+        #                                    + "/dependencies.txt"
+        #     if os.path.isfile(self.model_dependencies_file):
+        #         subdependencies = self.read(self.model_dependencies_file)
+        #         self.dependencies.extend(subdependencies)
 
         # Check that all the dependencies are met.
         self.check()

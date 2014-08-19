@@ -2,6 +2,8 @@
 rpm
 cmake
 pkg-config
+libglib2.0*
+libncurses5-dev
 gcc
 g++
 subversion

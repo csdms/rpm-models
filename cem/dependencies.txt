@@ -1,4 +1,0 @@
-# Build dependencies for CEM
-glib2
-glib2-devel
-ncurses-devel
