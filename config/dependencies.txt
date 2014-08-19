@@ -1,5 +1,6 @@
 # Build dependencies for RHEL-compatible distributions
 cmake
+pkgconfig
 gcc
 gcc-c++
 subversion

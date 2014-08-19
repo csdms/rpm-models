@@ -1,6 +1,7 @@
 # Build dependencies for Debian-compatible distributions
 rpm
 cmake
+pkg-config
 gcc
 g++
 subversion
