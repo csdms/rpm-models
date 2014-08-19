@@ -4,8 +4,8 @@
 # are present on the system.
 #
 # Usage:
-#   $ python check_dependencies.sh --help
-#   $ python check_dependencies.sh -m "hydrotrend"
+#   $ python check_dependencies.py --help
+#   $ python check_dependencies.py -m "hydrotrend"
 #
 # Mark Piper (mark.piper@colorado.edu)
 
