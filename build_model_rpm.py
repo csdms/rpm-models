@@ -108,7 +108,7 @@ class BuildModelRPM:
         print("Building RPMs.")
         spec_file = self.model + ".spec"
         shutil.copy(self.topdir + self.model + os.sep + spec_file, self.specs)
-        cmd = "rpmbuild -ba " + self.specs + spec_file \
+        cmd = "rpmbuild -ba --quiet " + self.specs + spec_file \
             + " --define '_version " + self.version + "'"
         ret = call(shlex.split(cmd))
         if ret != 0:
