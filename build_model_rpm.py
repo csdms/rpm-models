@@ -18,6 +18,7 @@ import argparse
 from subprocess import call
 import string
 import glob
+import shlex
 
 class BuildModelRPM:
     '''
@@ -107,7 +108,9 @@ class BuildModelRPM:
         print("Building RPMs.")
         spec_file = self.model + ".spec"
         shutil.copy(self.topdir + self.model + os.sep + spec_file, self.specs)
-        ret = call(["rpmbuild", "-ba", self.specs + spec_file])
+        cmd = "rpmbuild -ba " + self.specs + spec_file \
+            + " --define '_version " + self.version + "'"
+        ret = call(shlex.split(cmd))
         if ret != 0:
             print("Error in building model RPM.")
             sys.exit(5) # can't build RPM

@@ -1,5 +1,5 @@
 Name:		hydrotrend
-Version:	head
+Version:	%{_version}
 Release:	1%{?dist}
 Summary:	A hydrological water balance and transport model
 Group:		Applications/Engineering
