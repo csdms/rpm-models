@@ -1,4 +1,4 @@
-# Build dependencies for Debian-compatible distributions
+# Build dependencies for Debian-compatible distributions (mainly for Travis CI)
 rpm
 cmake
 pkg-config
