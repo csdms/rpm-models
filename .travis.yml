@@ -15,4 +15,3 @@ before_script:
 
 script:
   - nosetests -v
-  - python build_model_rpm.py --model hydrotrend
