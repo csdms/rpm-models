@@ -4,9 +4,9 @@ The file **dependencies.txt** lists the minimum set of packages
 needed to build an RPM of a CSDMS model
 on a RHEL-based Linux distribution (e.g., Fedora, CentOS).
 Packages required for a specific model
-are listed in the file **build_requires.txt**
+are listed in a file of the same name
 in the model's directory
-(e.g., **hydrotrend/build_requires.txt**).
+(e.g., **hydrotrend/dependencies.txt**).
 
 The file **dependencies_debian.txt** lists _all_ packages 
 required for Debian-based distributions (e.g., Ubuntu).

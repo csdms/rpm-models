@@ -39,6 +39,9 @@ class BuildModelRPM:
         self.model = model_name            
         self.version = "head" if model_version == None else model_version
 
+        self.dependencies_file = self.topdir + self.model + os.sep \
+                                 + "dependencies.txt"
+
         # Set up the rpmbuild directory.
         self.rpmbuild = os.getenv("HOME") + os.sep + "rpmbuild" + os.sep
         self.prep_directory()
@@ -123,12 +126,10 @@ class BuildModelRPM:
         '''
         Assembles the list of dependencies for the model.
         '''
-        bname = "build_requires.txt"
-        fname = self.topdir + self.model + os.sep + bname
-        if not os.path.isfile(fname):
+        if not os.path.isfile(self.dependencies_file):
             self.dependencies = "rpm" # XXX workaround; how to specify null?
         else:
-            deps = self.read(fname)
+            deps = self.read(self.dependencies_file)
             self.dependencies = string.join(deps, ", ")
 
     def build(self):
@@ -138,9 +139,6 @@ class BuildModelRPM:
         print("Building RPMs.")
         spec_file = self.model + ".spec"
         shutil.copy(self.topdir + self.model + os.sep + spec_file, self.specs)
-        # cmd = "rpmbuild -ba --quiet " + self.specs + spec_file \
-        #     + " --define '_version " + self.version + "'" \
-        #     + " --define '_buildrequires " + self.dependencies + "'"
         cmd = "rpmbuild -ba --quiet " + self.specs + spec_file \
             + " --define '_version " + self.version + "'"
         if not self.is_debian:
