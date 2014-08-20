@@ -61,7 +61,7 @@ class BuildModelRPM:
         # Build the binary and source RPMs.
         self.debian_check()
         self.get_dependencies()
-#        self.build()
+        self.build()
         print("Success!")
 
     def debian_check(self):
@@ -89,7 +89,6 @@ class BuildModelRPM:
         '''
         print("Getting " + self.model + " source.")
         self.source_target = self.sources_dir + self.model + "-" + self.version
-        print(self.source_target)
         with open(self.source_file, "r") as f:
             cmd = f.readline().strip()
         cmd += " " + self.source_target
@@ -113,7 +112,7 @@ class BuildModelRPM:
         Patches must use the extension ".patch".
         '''
         print("Applying patches.")
-        for patch in glob.glob(self.top_dir + self.model + os.sep + "*.patch"):
+        for patch in glob.glob(self.model_dir + "*.patch"):
             shutil.copy(patch, self.sources_dir)
 
     def read(self, fname):
@@ -143,7 +142,7 @@ class BuildModelRPM:
         print("Building RPMs.")
         shutil.copy(self.spec_file, self.specs_dir)
         cmd = "rpmbuild -ba --quiet " \
-            + self.specs_dir + os.path.basename(spec_file) \
+            + self.specs_dir + os.path.basename(self.spec_file) \
             + " --define '_version " + self.version + "'"
         if not self.is_debian:
             cmd += " --define '_buildrequires " + self.dependencies + "'"
