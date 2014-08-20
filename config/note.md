@@ -1,9 +1,17 @@
 # Note
 
-The file **dependencies.txt** lists the packages needed to build an RPM
-on a RHEL-based Linux distribution (e.g., CentOS).
-The file **dependencies_debian.txt** lists packages required for
-Debian-based distributions (e.g., Ubuntu).
+The file **dependencies.txt** lists the minimum set of packages 
+needed to build an RPM of a CSDMS model
+on a RHEL-based Linux distribution (e.g., Fedora, CentOS).
+Packages required for a specific model
+are listed in the file **build_requires.txt**
+in the model's directory
+(e.g., **hydrotrend/build_requires.txt**).
+
+The file **dependencies_debian.txt** lists _all_ packages 
+required for Debian-based distributions (e.g., Ubuntu).
+This list is primarily used for integration testing
+with [Travis CI](https://travis-ci.com/).
 
 The file **macros.cmake**,
 containing the definition of the `%cmake` macro
@@ -12,7 +20,3 @@ is provided here because
 it's not included in the CMake package
 on the Ubuntu 12.04 LTS virtual machine
 used by Travis CI.
-This file is not needed
-for RHEL and CentOS
-because the macro is included in the CMake package
-used on these distros.
