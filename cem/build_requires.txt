@@ -4,4 +4,3 @@ ncurses-devel
 glib2
 glib2-devel
 pkgconfig
-

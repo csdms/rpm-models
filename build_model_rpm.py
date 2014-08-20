@@ -54,6 +54,7 @@ class BuildModelRPM:
 
         # Build the binary and source RPMs.
         self.debian_check()
+        self.get_dependencies()
         self.build()
         print("Success!")
 
@@ -108,19 +109,27 @@ class BuildModelRPM:
         for patch in glob.glob(self.topdir + self.model + os.sep + "*.patch"):
             shutil.copy(patch, self.sources)
 
-    def read(self):
+    def read(self, fname):
         '''
-        Reads a list of required package names, as strings, from the
-        text file 'build_requires.txt'. 
+        Reads a list of items, as strings, from a text file.
+        '''
+        with open(fname, "r") as f:
+            items = f.read().split("\n")
+        items.pop(0) # remove first and
+        items.pop()  # last items from list
+        return items
+
+    def get_dependencies(self):
+        '''
+        Assembles the list of dependencies for the model.
         '''
         bname = "build_requires.txt"
         fname = self.topdir + self.model + os.sep + bname
-        with open(fname, "r") as f:
-            deps = f.read().split("\n")
-        deps.pop(0) # remove first and
-        deps.pop()  # last items from list
-        sdeps = string.join(deps, ", ")
-        return sdeps
+        if self.is_debian or not os.path.isfile(fname):
+            self.dependencies = "rpm" # XXX workaround; how to specify null?
+        else:
+            deps = self.read(fname)
+            self.dependencies = string.join(deps, ", ")
 
     def build(self):
         '''
@@ -130,9 +139,8 @@ class BuildModelRPM:
         spec_file = self.model + ".spec"
         shutil.copy(self.topdir + self.model + os.sep + spec_file, self.specs)
         cmd = "rpmbuild -ba --quiet " + self.specs + spec_file \
-            + " --define '_version " + self.version + "'"
-        if not self.is_debian:
-            cmd += " --define '_buildrequires " + self.read() + "'"
+            + " --define '_version " + self.version + "'" \
+            + " --define '_buildrequires " + self.dependencies + "'"
         print(cmd)
         ret = call(shlex.split(cmd))
         if ret != 0:
