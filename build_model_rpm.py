@@ -26,21 +26,24 @@ class BuildModelRPM:
     its source code.
     '''
     def __init__(self, model_name, model_version):
-        self.topdir = os.path.dirname(os.path.realpath(__file__)) + os.sep
+        self.top_dir = os.path.dirname(os.path.realpath(__file__)) + os.sep
 
         if model_name == None:
             print("A model must be specified with the '-m' flag.")
             sys.exit(2) # no model
 
-        if not os.path.isdir(self.topdir + model_name):
+        if not os.path.isdir(self.top_dir + model_name):
             print("The model '" + model_name + "' cannot be located.")
             sys.exit(3) # can't find model
 
         self.model = model_name            
         self.version = "head" if model_version == None else model_version
 
-        self.dependencies_file = self.topdir + self.model + os.sep \
-                                 + "dependencies.txt"
+        # Model directory and setup files.
+        self.model_dir = self.top_dir + self.model + os.sep
+        self.dependencies_file = self.model_dir + "dependencies.txt"
+        self.source_file = self.model_dir + "source.txt"
+        self.spec_file = self.model_dir + self.model + ".spec"
 
         # Set up the rpmbuild directory.
         self.rpmbuild = os.getenv("HOME") + os.sep + "rpmbuild" + os.sep
@@ -58,7 +61,7 @@ class BuildModelRPM:
         # Build the binary and source RPMs.
         self.debian_check()
         self.get_dependencies()
-        self.build()
+#        self.build()
         print("Success!")
 
     def debian_check(self):
@@ -77,16 +80,17 @@ class BuildModelRPM:
             call(["rpmdev-wipetree"])
         else:
             call(["rpmdev-setuptree"])
-        self.sources = self.rpmbuild + "SOURCES" + os.sep
-        self.specs = self.rpmbuild + "SPECS" + os.sep
+        self.sources_dir = self.rpmbuild + "SOURCES" + os.sep
+        self.specs_dir = self.rpmbuild + "SPECS" + os.sep
 
     def get_source(self):
         '''
         Retrieves the model source from an external repository.
         '''
         print("Getting " + self.model + " source.")
-        self.source_target = self.sources + self.model + "-" + self.version
-        with open(self.topdir + self.model + os.sep + "source.txt", "r") as f:
+        self.source_target = self.sources_dir + self.model + "-" + self.version
+        print(self.source_target)
+        with open(self.source_file, "r") as f:
             cmd = f.readline().strip()
         cmd += " " + self.source_target
         ret = call(cmd, shell=True)
@@ -99,7 +103,7 @@ class BuildModelRPM:
         Makes a tarball (required by rpmbuild) from the model source.
         '''
         print("Making tarball.")
-        shutil.make_archive(self.source_target, 'gztar', self.sources, \
+        shutil.make_archive(self.source_target, 'gztar', self.sources_dir, \
                             os.path.basename(self.source_target))
         shutil.rmtree(self.source_target)
 
@@ -109,8 +113,8 @@ class BuildModelRPM:
         Patches must use the extension ".patch".
         '''
         print("Applying patches.")
-        for patch in glob.glob(self.topdir + self.model + os.sep + "*.patch"):
-            shutil.copy(patch, self.sources)
+        for patch in glob.glob(self.top_dir + self.model + os.sep + "*.patch"):
+            shutil.copy(patch, self.sources_dir)
 
     def read(self, fname):
         '''
@@ -137,9 +141,9 @@ class BuildModelRPM:
         Build binary and source RPMS.
         '''
         print("Building RPMs.")
-        spec_file = self.model + ".spec"
-        shutil.copy(self.topdir + self.model + os.sep + spec_file, self.specs)
-        cmd = "rpmbuild -ba --quiet " + self.specs + spec_file \
+        shutil.copy(self.spec_file, self.specs_dir)
+        cmd = "rpmbuild -ba --quiet " \
+            + self.specs_dir + os.path.basename(spec_file) \
             + " --define '_version " + self.version + "'"
         if not self.is_debian:
             cmd += " --define '_buildrequires " + self.dependencies + "'"
