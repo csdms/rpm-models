@@ -93,7 +93,7 @@ class BuildModelRPM:
 
     def make_tarball(self):
         '''
-        Makes a tarball (required by rpmbuild) from the model's source.
+        Makes a tarball (required by rpmbuild) from the model source.
         '''
         print("Making tarball.")
         shutil.make_archive(self.source_target, 'gztar', self.sources, \
@@ -125,7 +125,7 @@ class BuildModelRPM:
         '''
         bname = "build_requires.txt"
         fname = self.topdir + self.model + os.sep + bname
-        if self.is_debian or not os.path.isfile(fname):
+        if not os.path.isfile(fname):
             self.dependencies = "rpm" # XXX workaround; how to specify null?
         else:
             deps = self.read(fname)
@@ -138,9 +138,13 @@ class BuildModelRPM:
         print("Building RPMs.")
         spec_file = self.model + ".spec"
         shutil.copy(self.topdir + self.model + os.sep + spec_file, self.specs)
+        # cmd = "rpmbuild -ba --quiet " + self.specs + spec_file \
+        #     + " --define '_version " + self.version + "'" \
+        #     + " --define '_buildrequires " + self.dependencies + "'"
         cmd = "rpmbuild -ba --quiet " + self.specs + spec_file \
-            + " --define '_version " + self.version + "'" \
-            + " --define '_buildrequires " + self.dependencies + "'"
+            + " --define '_version " + self.version + "'"
+        if not self.is_debian:
+            cmd += " --define '_buildrequires " + self.dependencies + "'"
         print(cmd)
         ret = call(shlex.split(cmd))
         if ret != 0:

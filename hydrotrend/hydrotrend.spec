@@ -12,7 +12,9 @@ Source0:	%{name}-%{version}.tar.gz
 Patch0:		hydrotrend-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 
+%if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
+%endif
 #Requires:
 
 %description
