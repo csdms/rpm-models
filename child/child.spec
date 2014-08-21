@@ -8,6 +8,8 @@ URL:		http://csdms.colorado.edu/wiki/Model:CHILD
 # The CHILD source can be checked out from the CSDMS Trac site:
 # $ svn co https://csdms.colorado.edu/svn/child/trunk
 Source0:	%{name}-%{version}.tar.gz
+# This patch allows the -DLIB_SUFFIX option to CMake.
+Patch0:		%{name}-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 
 %if 0%{?_buildrequires:1}
@@ -21,9 +23,10 @@ by fluvial and hillslope erosion and sediment transport.
 
 %prep
 %setup -q
+%patch0
 
 %build
-%cmake . 
+%cmake . -DLIB_SUFFIX=64
 make %{?_smp_mflags}
 
 %install

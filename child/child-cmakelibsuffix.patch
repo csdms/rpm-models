@@ -1,0 +1,37 @@
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 1843)
++++ CMakeLists.txt	(working copy)
+@@ -6,6 +6,9 @@
+ 
+ configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/child.pc.cmake ${CMAKE_CURRENT_SOURCE_DIR}/child.pc )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ include_directories(
+   ${CMAKE_CURRENT_SOURCE_DIR}
+   ${CMAKE_CURRENT_SOURCE_DIR}/Erosion
+@@ -71,19 +74,19 @@
+ )
+ 
+ add_library (child-shared SHARED ${child_LIB_SRCS})
+-install (TARGETS child-shared DESTINATION lib COMPONENT child)
++install (TARGETS child-shared DESTINATION ${LIB_DIR} COMPONENT child)
+ set_target_properties (child-shared PROPERTIES OUTPUT_NAME "child")
+ 
+ add_library (child-static STATIC ${child_LIB_SRCS})
+ set_target_properties (child-static PROPERTIES OUTPUT_NAME "child")
+-install (TARGETS child-static DESTINATION lib COMPONENT child)
++install (TARGETS child-static DESTINATION ${LIB_DIR} COMPONENT child)
+ 
+ set (child_SRCS ChildInterface/childDriver.cpp)
+ 
+ add_executable (child ${child_SRCS})
+ target_link_libraries (child child-static)
+ 
+-install(FILES child.pc DESTINATION lib/pkgconfig  COMPONENT child)
++install(FILES child.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT child)
+ 
+ install (TARGETS child DESTINATION bin COMPONENT child)
+ 
