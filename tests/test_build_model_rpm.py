@@ -25,3 +25,6 @@ def test_cem_version_head():
 
 #def test_cem_tagged_version():
 #    BuildModelRPM("cem", "0.2")
+
+def test_child_version_head():
+    BuildModelRPM("child", "head")

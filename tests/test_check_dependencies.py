@@ -10,3 +10,6 @@ def test_hydrotrend():
 
 def test_cem():
     CheckDependencies("cem")
+
+def test_child():
+    CheckDependencies("child")
