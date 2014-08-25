@@ -1,0 +1,3 @@
+# Packages required to build sedflux
+cmake
+glib2

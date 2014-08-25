@@ -1,0 +1,2 @@
+svn export --quiet https://github.com/mcflugen/sedflux/trunk
+#git clone git://github.com/mcflugen/sedflux.git
