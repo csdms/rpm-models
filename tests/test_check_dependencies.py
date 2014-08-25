@@ -13,3 +13,6 @@ def test_cem():
 
 def test_child():
     CheckDependencies("child")
+
+def test_child():
+    CheckDependencies("sedflux")

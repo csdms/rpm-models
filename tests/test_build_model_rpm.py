@@ -28,3 +28,6 @@ def test_cem_version_head():
 
 def test_child_version_head():
     BuildModelRPM("child", "head")
+
+def test_child_version_head():
+    BuildModelRPM("sedflux", "head")
