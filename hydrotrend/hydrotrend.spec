@@ -9,7 +9,7 @@ URL:		http://csdms.colorado.edu/wiki/Model:HydroTrend
 # $ svn co https://csdms.colorado.edu/svn/hydrotrend/trunk
 Source0:	%{name}-%{version}.tar.gz
 # This patch allows the -DLIB_SUFFIX option to CMake.
-Patch0:		hydrotrend-cmakelibsuffix.patch
+Patch0:		%{name}-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 
 %if 0%{?_buildrequires:1}
