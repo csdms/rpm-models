@@ -8,6 +8,8 @@ URL:		http://csdms.colorado.edu/wiki/Model:Sedflux
 # The Sedflux source can be checked out from GitHub:
 # $ git clone https://github.com/mcflugen/sedflux.git
 Source0:	%{name}-%{version}.tar.gz
+# This patch allows the -DLIB_SUFFIX option to CMake.
+Patch0:		%{name}-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 
 %if 0%{?_buildrequires:1}
@@ -24,9 +26,10 @@ sediment load across a continental margin.
 
 %prep
 %setup -q
+%patch0
 
 %build
-%cmake .
+%cmake . -DLIB_SUFFIX=64
 make %{?_smp_mflags}
 
 %install
@@ -153,7 +156,33 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/ew-2.0/utils/utils.h
 %{_includedir}/ew-2.0/xshore.h
 %{_libdir}/libavulsion.so
-#%{_libdir}/pkgconfig/%{name}.pc
+%{_libdir}/libbing.so
+%{_libdir}/libbio.so
+%{_libdir}/libbmiplume.so
+%{_libdir}/libbmisedflux2d.so
+%{_libdir}/libbmisedflux3d.so
+%{_libdir}/libcompact.so
+%{_libdir}/libdiffusion.so
+%{_libdir}/libfailure.so
+%{_libdir}/libflow.so
+%{_libdir}/libinflow.so
+%{_libdir}/libmuds.so
+%{_libdir}/libplume.so
+%{_libdir}/libquake.so
+%{_libdir}/libsakura.so
+%{_libdir}/libsedflux-2.0.so
+%{_libdir}/libsedflux.so
+%{_libdir}/libsquall.so
+%{_libdir}/libsubside.so
+%{_libdir}/libutils.so
+%{_libdir}/libxshore.so
+%{_libdir}/pkgconfig/avulsion.pc
+%{_libdir}/pkgconfig/plume.pc
+%{_libdir}/pkgconfig/sed.pc
+%{_libdir}/pkgconfig/sedflux.pc
+%{_libdir}/pkgconfig/sedflux2d.pc
+%{_libdir}/pkgconfig/sedflux3d.pc
+%{_libdir}/pkgconfig/utils.pc
 
 %changelog
 * Sun Aug 24 2014 Mark Piper <mark.piper@colorado.edu>

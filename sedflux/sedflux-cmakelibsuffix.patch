@@ -1,0 +1,463 @@
+Index: ew/bing/CMakeLists.txt
+===================================================================
+--- ew/bing/CMakeLists.txt	(revision 337)
++++ ew/bing/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -24,7 +26,7 @@
+ 
+ target_link_libraries(bing sedflux)
+ 
+-install(TARGETS bing DESTINATION lib COMPONENT sedflux)
++install(TARGETS bing DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/plume/CMakeLists.txt
+===================================================================
+--- ew/plume/CMakeLists.txt	(revision 337)
++++ ew/plume/CMakeLists.txt	(working copy)
+@@ -2,6 +2,9 @@
+ 
+ configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/plume.pc.cmake ${CMAKE_CURRENT_SOURCE_DIR}/plume.pc )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ ########### next target ###############
+ 
+ SET(plume_SRCS
+@@ -61,7 +64,7 @@
+ 
+ target_link_libraries(plume sedflux)
+ 
+-install(TARGETS plume DESTINATION lib COMPONENT sedflux)
++install(TARGETS plume DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ set (plume_bmi_LIB_SRCS
+   plume_bmi.c
+@@ -72,7 +75,7 @@
+ add_library(bmiplume ${plume_bmi_LIB_SRCS})
+ add_library(bmiplume-static STATIC ${plume_bmi_LIB_SRCS})
+ target_link_libraries(bmiplume sedflux)
+-install(TARGETS bmiplume DESTINATION lib)
++install(TARGETS bmiplume DESTINATION ${LIB_DIR})
+ 
+ ########### install files ###############
+ 
+@@ -80,5 +83,5 @@
+ install (FILES plume_bmi.h RENAME bmi_plume.h DESTINATION include COMPONENT sedflux)
+ 
+ 
+-install (FILES plume.pc DESTINATION lib/pkgconfig  COMPONENT sedflux)
++install (FILES plume.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT sedflux)
+ 
+Index: ew/compact/CMakeLists.txt
+===================================================================
+--- ew/compact/CMakeLists.txt	(revision 337)
++++ ew/compact/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -24,7 +26,7 @@
+ 
+ target_link_libraries(compact sedflux)
+ 
+-install(TARGETS compact DESTINATION lib COMPONENT sedflux)
++install(TARGETS compact DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/diffusion/CMakeLists.txt
+===================================================================
+--- ew/diffusion/CMakeLists.txt	(revision 337)
++++ ew/diffusion/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -25,7 +27,7 @@
+ 
+ target_link_libraries(diffusion sedflux)
+ 
+-install(TARGETS diffusion DESTINATION lib COMPONENT sedflux)
++install(TARGETS diffusion DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/sakura/CMakeLists.txt
+===================================================================
+--- ew/sakura/CMakeLists.txt	(revision 337)
++++ ew/sakura/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -28,7 +30,7 @@
+ 
+ target_link_libraries(sakura sedflux)
+ 
+-install(TARGETS sakura DESTINATION lib COMPONENT sedflux)
++install(TARGETS sakura DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/failure/CMakeLists.txt
+===================================================================
+--- ew/failure/CMakeLists.txt	(revision 337)
++++ ew/failure/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -12,7 +14,7 @@
+ 
+ target_link_libraries(failure sedflux)
+ 
+-install(TARGETS failure DESTINATION lib COMPONENT sedflux)
++install(TARGETS failure DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/subside/CMakeLists.txt
+===================================================================
+--- ew/subside/CMakeLists.txt	(revision 337)
++++ ew/subside/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -25,7 +27,7 @@
+ 
+ target_link_libraries(subside sedflux)
+ 
+-install(TARGETS subside DESTINATION lib COMPONENT sedflux)
++install(TARGETS subside DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/inflow/CMakeLists.txt
+===================================================================
+--- ew/inflow/CMakeLists.txt	(revision 337)
++++ ew/inflow/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -35,7 +37,7 @@
+ 
+ target_link_libraries(inflow sedflux)
+ 
+-install(TARGETS inflow DESTINATION lib COMPONENT sedflux)
++install(TARGETS inflow DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/utils/CMakeLists.txt
+===================================================================
+--- ew/utils/CMakeLists.txt	(revision 337)
++++ ew/utils/CMakeLists.txt	(working copy)
+@@ -15,6 +15,9 @@
+   add_definitions (-DHAVE_GETLINE)
+ endif (HAVE_GETLINE)
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ ########### next target ###############
+ 
+ SET(utils_LIB_SRCS
+@@ -56,7 +59,7 @@
+ target_link_libraries(utils m ${GLIB2_LIBRARIES} ${GTHREAD2_LIBRARIES} ${EXTRA_LIBS})
+ #target_link_libraries(utils_STATIC m ${GLIB2_LIBRARIES} ${GTHREAD2_LIBRARIES} ${EXTRA_LIBS})
+ 
+-install(TARGETS utils DESTINATION lib COMPONENT sedflux)
++install(TARGETS utils DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ #install(TARGETS utils_STATIC DESTINATION lib COMPONENT sedflux)
+ 
+ 
+@@ -119,7 +122,7 @@
+ install(FILES  eh_utils.h DESTINATION include/ew-2.0 COMPONENT sedflux)
+ 
+ install(FILES  utils.h                           eh_rand.h                           eh_logging.h                           eh_scanner.h                           eh_glib.h                           eh_get_opt.h                           complex.h                           eh_num.h                           f2c.h                           eh_mem.h                           eh_project.h                           eh_opt_context.h                           eh_ndgrid.h                           eh_grid.h                           eh_key_file.h                           eh_symbol_table.h                           eh_data_record.h                           eh_types.h                           eh_input_val.h                           eh_dlm_file.h                           eh_str.h                           eh_io.h                           eh_status_bar.h                           eh_sequence.h                           eh_polygon.h                           eh_misc.h                           eh_thread_pool.h                           eh_file_utils.h                           eh_messages.h                           eh_macros.h DESTINATION include/ew-2.0/utils COMPONENT sedflux)
+-install(FILES  utils.pc DESTINATION lib/pkgconfig  COMPONENT sedflux)
++install(FILES  utils.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT sedflux)
+ 
+ 
+ 
+Index: ew/avulsion/CMakeLists.txt
+===================================================================
+--- ew/avulsion/CMakeLists.txt	(revision 337)
++++ ew/avulsion/CMakeLists.txt	(working copy)
+@@ -2,6 +2,9 @@
+ 
+ configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/avulsion.pc.cmake ${CMAKE_CURRENT_SOURCE_DIR}/avulsion.pc )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ ########### next target ###############
+ 
+ set (avulsion_SRCS avulsion_main.c)
+@@ -24,7 +27,7 @@
+ 
+ target_link_libraries(avulsion sedflux)
+ 
+-install(TARGETS avulsion DESTINATION lib COMPONENT sedflux)
++install(TARGETS avulsion DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+@@ -38,5 +41,5 @@
+          DESTINATION include
+          COMPONENT sedflux)
+ 
+-install (FILES avulsion.pc DESTINATION lib/pkgconfig  COMPONENT sedflux)
++install (FILES avulsion.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT sedflux)
+ 
+Index: ew/squall/CMakeLists.txt
+===================================================================
+--- ew/squall/CMakeLists.txt	(revision 337)
++++ ew/squall/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -25,7 +27,7 @@
+ 
+ target_link_libraries(squall sedflux)
+ 
+-install(TARGETS squall DESTINATION lib COMPONENT sedflux)
++install(TARGETS squall DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/quake/CMakeLists.txt
+===================================================================
+--- ew/quake/CMakeLists.txt	(revision 337)
++++ ew/quake/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -22,7 +24,7 @@
+ 
+ target_link_libraries(quake utils)
+ 
+-install(TARGETS quake DESTINATION lib COMPONENT sedflux)
++install(TARGETS quake DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/flow/CMakeLists.txt
+===================================================================
+--- ew/flow/CMakeLists.txt	(revision 337)
++++ ew/flow/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -12,7 +14,7 @@
+ 
+ target_link_libraries(flow sedflux)
+ 
+-install(TARGETS flow DESTINATION lib COMPONENT sedflux)
++install(TARGETS flow DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### next target ###############
+Index: ew/muds/CMakeLists.txt
+===================================================================
+--- ew/muds/CMakeLists.txt	(revision 337)
++++ ew/muds/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -24,7 +26,7 @@
+ 
+ target_link_libraries(muds sedflux)
+ 
+-install(TARGETS muds DESTINATION lib COMPONENT sedflux)
++install(TARGETS muds DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/xshore/CMakeLists.txt
+===================================================================
+--- ew/xshore/CMakeLists.txt	(revision 337)
++++ ew/xshore/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -11,7 +13,7 @@
+ 
+ target_link_libraries(xshore sedflux)
+ 
+-install(TARGETS xshore DESTINATION lib COMPONENT sedflux)
++install(TARGETS xshore DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/bio/CMakeLists.txt
+===================================================================
+--- ew/bio/CMakeLists.txt	(revision 337)
++++ ew/bio/CMakeLists.txt	(working copy)
+@@ -1,5 +1,7 @@
+ include_directories(${CMAKE_SOURCE_DIR}/ew )
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
+ 
+ ########### next target ###############
+ 
+@@ -25,7 +27,7 @@
+ 
+ target_link_libraries(bio sedflux)
+ 
+-install(TARGETS bio DESTINATION lib COMPONENT sedflux)
++install(TARGETS bio DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### install files ###############
+Index: ew/sedflux/CMakeLists.txt
+===================================================================
+--- ew/sedflux/CMakeLists.txt	(revision 337)
++++ ew/sedflux/CMakeLists.txt	(working copy)
+@@ -14,6 +14,9 @@
+   muds-static bing-static failure-static quake-static compact-static
+   inflow-static plume-static)
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ ########### next target ###############
+ 
+ set(sedflux_SRCS
+@@ -83,12 +86,12 @@
+ add_library(bmisedflux3d-static STATIC ${sedflux-2.0_LIB_SRCS} sedflux3d_bmi.c)
+ target_link_libraries(bmisedflux3d sedflux ${sedflux_LIBS})
+ 
+-install(TARGETS sedflux-2.0 DESTINATION lib COMPONENT sedflux)
+-install(TARGETS bmisedflux2d DESTINATION lib COMPONENT sedflux)
+-install(TARGETS bmisedflux3d DESTINATION lib COMPONENT sedflux)
+-install(FILES  sedflux.pc DESTINATION lib/pkgconfig  COMPONENT sedflux)
+-install(FILES  sedflux2d.pc DESTINATION lib/pkgconfig  COMPONENT sedflux)
+-install(FILES  sedflux3d.pc DESTINATION lib/pkgconfig  COMPONENT sedflux)
++install(TARGETS sedflux-2.0 DESTINATION ${LIB_DIR} COMPONENT sedflux)
++install(TARGETS bmisedflux2d DESTINATION ${LIB_DIR} COMPONENT sedflux)
++install(TARGETS bmisedflux3d DESTINATION ${LIB_DIR} COMPONENT sedflux)
++install(FILES  sedflux.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT sedflux)
++install(FILES  sedflux2d.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT sedflux)
++install(FILES  sedflux3d.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT sedflux)
+ 
+ ########### install files ###############
+ 
+Index: ew/sed/CMakeLists.txt
+===================================================================
+--- ew/sed/CMakeLists.txt	(revision 337)
++++ ew/sed/CMakeLists.txt	(working copy)
+@@ -3,6 +3,9 @@
+ 
+ include (FindSubversion OPTIONAL RESULT_VARIABLE SUBVERSION)
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ ########### Get subversion revision number ###############
+ 
+ set (DATADIR ${CMAKE_INSTALL_PREFIX}/share)
+@@ -63,7 +66,7 @@
+ target_link_libraries(sedflux-static m utils-static
+   ${GLIB2_LIBRARIES} ${GTHREAD2_LIBRARIES})
+ 
+-install(TARGETS sedflux DESTINATION lib COMPONENT sedflux)
++install(TARGETS sedflux DESTINATION ${LIB_DIR} COMPONENT sedflux)
+ 
+ 
+ ########### next target ###############
+@@ -133,7 +136,7 @@
+ 
+ install(FILES  sed.h DESTINATION include/ew-2.0 COMPONENT sedflux)
+ install(FILES  csdms.h                             sed_cell.h                             sed_column.h                             sed_const.h                             sed_cube.h                             sed_diag.h                             sed_epoch.h                             sed_hydro.h                             sed_hydrotrend.h                             sed_process.h                             sed_property.h                             sed_property_file.h                             sed_river.h                             sed_sediment.h                             sed_signal.h                             sed_tripod.h                             sed_wave.h                             etk_addrem.h                             etk_keyvalue.h                             datadir_path.h DESTINATION include/ew-2.0/sed COMPONENT sedflux)
+-install(FILES  sed.pc DESTINATION lib/pkgconfig  COMPONENT sedflux)
++install(FILES  sed.pc DESTINATION ${LIB_DIR}/pkgconfig  COMPONENT sedflux)
+ 
+ 
+ 
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 337)
++++ CMakeLists.txt	(working copy)
+@@ -3,6 +3,9 @@
+ project(sedflux)
+ include(CTest)
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ #enable_testing()
+ 
+ if (BUILD_TESTING)
+@@ -32,7 +35,8 @@
+ ########### Look for glib-2.0 ###############
+ 
+ if (DEFINED CMAKE_GLIB_DIR)
+-  set (ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:${CMAKE_GLIB_DIR}/lib/pkgconfig")
++  set (ENV{PKG_CONFIG_PATH}
++"$ENV{PKG_CONFIG_PATH}:${CMAKE_GLIB_DIR}/${LIB_DIR}/pkgconfig")
+ endif (DEFINED CMAKE_GLIB_DIR)
+ 
+ include( FindPkgConfig )
