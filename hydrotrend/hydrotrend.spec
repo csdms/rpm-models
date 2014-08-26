@@ -36,6 +36,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %check
 ctest
 
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
