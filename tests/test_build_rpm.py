@@ -1,6 +1,6 @@
 #! /usr/bin/python
 
-from build_model_rpm import BuildModelRPM
+from build_rpm import BuildModelRPM
 from nose.tools import *
 
 @raises(TypeError)
