@@ -18,6 +18,7 @@ project.
 
 Call `check_dependencies.py`
 to ensure that all the packages needed to build an RPM
+for a particular model
 are installed on your machine:
 
 ```bash
@@ -29,16 +30,17 @@ Be sure to install any required packages before proceeding.
 **Building a package**
 
 To create RPMs for a model,
-call `build_model_rpm.py` with the model name and 
-version tag as parameters:
+call `build_rpm.py` with the model name as a parameter:
 
 ```bash
-$ python build_model_rpm.py --model hydrotrend --tag head
+$ python build_rpm.py hydrotrend
 ```
 
 This script
-downloads the tagged version of the specified model from the
-CSDMS repository (the default is the HEAD revision of the trunk),
+downloads the source 
+(the HEAD revision on the trunk branch) 
+for the specified model 
+from a hosted repository (CSDMS or GitHub),
 then calls
 [rpmbuild](http://www.rpm.org/max-rpm-snapshot/rpmbuild.8.html)
 to create binary and source RPMs for the model.
@@ -53,7 +55,7 @@ on your machine.
 **Installation**
 
 Install the package with `rpm`,
-or with a package manager, such as `yum`.
+or (better) with a package manager, such as `yum`.
 For example,
 
 ```bash
