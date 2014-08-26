@@ -3,13 +3,14 @@
 # Builds binary and source RPMs for a model in the CSDMS repository.
 #
 # Arguments:
-#   -m is the model name (required)
+#   the model name (required)
 #   -t is the tagged model version (optional)
 #   -h shows the help message
 #
 # Usage:
-#   $ python build_model_rpm.py --help
-#   $ python build_model_rpm.py --model hydrotrend -tag 3.0.2
+#   $ python build_rpm.py --help
+#   $ python build_rpm.py hydrotrend
+#   $ python build_rpm.py cem --tag 0.2
 #
 # Mark Piper (mark.piper@colorado.edu)
 
