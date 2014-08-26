@@ -28,10 +28,6 @@ class BuildModelRPM:
     def __init__(self, model_name, model_version):
         self.top_dir = os.path.dirname(os.path.realpath(__file__)) + os.sep
 
-        if model_name == None:
-            print("A model must be specified with the '-m' flag.")
-            sys.exit(2) # no model
-
         if not os.path.isdir(self.top_dir + model_name):
             print("The model '" + model_name + "' cannot be located.")
             sys.exit(3) # can't find model
@@ -150,7 +146,7 @@ class BuildModelRPM:
         ret = call(shlex.split(cmd))
         if ret != 0:
             print("Error in building model RPM.")
-            sys.exit(5) # can't build RPM
+            sys.exit(2) # can't build RPM
 
 #-----------------------------------------------------------------------------
 
@@ -166,7 +162,7 @@ def main():
 
     # Which model is being built?
     parser = argparse.ArgumentParser()
-    parser.add_argument("-m", "--model",
+    parser.add_argument("model",
                         help="the name of the model to build")
     parser.add_argument("-t", "--tag",
                         help="the tagged version of the model")
