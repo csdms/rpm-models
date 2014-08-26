@@ -18,11 +18,11 @@ BuildRequires:	%{_buildrequires}
 #Requires:
 
 %description 
-Sedflux-2.0 is the newest version of the Sedflux
-basin-filling model. Sedflux-2.0 provides a framework within which
-individual process-response models of disparate time and space
-resolutions communicate with one another to deliver multi grain sized
-sediment load across a continental margin.
+Sedflux-2.0 is the newest version of the Sedflux basin-filling
+model. Sedflux-2.0 provides a framework within which individual
+process-response models of disparate time and space resolutions
+communicate with one another to deliver multi grain sized sediment
+load across a continental margin.
 
 %prep
 %setup -q
