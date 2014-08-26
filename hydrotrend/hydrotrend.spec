@@ -51,5 +51,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/output/*
 
 %changelog
-* Wed Aug 6 2014 Mark Piper <mark.piper@colorado.edu>
+* Tue Aug 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package

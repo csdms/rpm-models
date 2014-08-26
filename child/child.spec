@@ -98,5 +98,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
-* Wed Aug 20 2014 Mark Piper <mark.piper@colorado.edu>
-- Set up spec file for building package
+* Tue Aug 26 2014 Mark Piper <mark.piper@colorado.edu>
+- Initial version of the package
