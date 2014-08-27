@@ -24,6 +24,17 @@ process-response models of disparate time and space resolutions
 communicate with one another to deliver multi grain sized sediment
 load across a continental margin.
 
+%package -n plume
+Summary:	Hypopycnal sediment plume
+Group:		Applications/Engineering
+URL:            http://csdms.colorado.edu/wiki/Model:Plume
+
+%description -n plume
+Plume simulates the sediment transport and deposition of several grainsize 
+classes from a river mouth entering into a marine basin by creating a
+turbulent jet. The model forms a hypopycnal plume. The model allows for 
+plume deflection due to systematic currents or Coriolis force.
+
 %prep
 %setup -q
 %patch0
@@ -186,6 +197,35 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/sedflux2d.pc
 %{_libdir}/pkgconfig/sedflux3d.pc
 %{_libdir}/pkgconfig/utils.pc
+
+%files -n plume
+%defattr(-,root,root,-)
+%{_bindir}/plume
+%{_libdir}/libavulsion.so
+%{_libdir}/libbing.so
+%{_libdir}/libbio.so
+%{_libdir}/libbmiplume.so
+%{_libdir}/libcompact.so
+%{_libdir}/libdiffusion.so
+%{_libdir}/libfailure.so
+%{_libdir}/libflow.so
+%{_libdir}/libinflow.so
+%{_libdir}/libmuds.so
+%{_libdir}/libplume.so
+%{_libdir}/libquake.so
+%{_libdir}/libsakura.so
+%{_libdir}/libsedflux-2.0.so
+%{_libdir}/libsedflux.so
+%{_libdir}/libsquall.so
+%{_libdir}/libsubside.so
+%{_libdir}/libutils.so
+%{_libdir}/libxshore.so
+%{_libdir}/pkgconfig/plume.pc
+%{_libdir}/pkgconfig/sed.pc
+%{_libdir}/pkgconfig/utils.pc
+%{_includedir}/bmi_plume.h
+%{_includedir}/ew-2.0/plume*.h
+%{_includedir}/ew-2.0/utils/
 
 %changelog
 * Tue Aug 26 2014 Mark Piper <mark.piper@colorado.edu>
