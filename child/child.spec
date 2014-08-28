@@ -1,6 +1,6 @@
 Name:		child
 Version:	%{_version}
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	A landscape evolution model
 Group:		Applications/Engineering
 License:	GPLv2
@@ -11,11 +11,11 @@ Source0:	%{name}-%{version}.tar.gz
 # This patch allows the -DLIB_SUFFIX option to CMake.
 Patch0:		%{name}-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
+Prefix:		/usr
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
 %endif
-#Requires:
 
 %description
 CHILD computes the time evolution of a topographic surface z(x,y,t) 
@@ -26,7 +26,7 @@ by fluvial and hillslope erosion and sediment transport.
 %patch0
 
 %build
-%cmake . -DLIB_SUFFIX=64
+%cmake . %_cmake_lib_suffix64
 make %{?_smp_mflags}
 
 %install
@@ -101,5 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Thu Aug 28 2014 Mark Piper <mark.piper@colorado.edu>
+- Make package relocatable
+
 * Tue Aug 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
+

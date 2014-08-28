@@ -1,6 +1,9 @@
+%define _waves waves
+%define _deltas deltas
+
 Name:		cem
 Version:	%{_version}
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	The Coastline Evolution Model from Duke University
 Group:		Applications/Engineering
 License:	BSD
@@ -13,14 +16,11 @@ Patch0:		cem-cmakecxx.patch
 # Patch1 allows the -DLIB_SUFFIX option to CMake.
 Patch1:		cem-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
+Prefix:		/usr
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
 %endif
-#Requires:
-
-%global _waves waves
-%global _deltas deltas
 
 %description
 The Coastline Evolution Model (CEM) addresses predominately sandy,
@@ -46,7 +46,7 @@ evolution through beach nourishment or hard structures.
 %patch1
 
 %build
-%cmake . -DLIB_SUFFIX=64
+%cmake . %_cmake_lib_suffix64
 make %{?_smp_mflags}
 
 %install
@@ -79,5 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{_deltas}/output/*
 
 %changelog
+* Thu Aug 28 2014 Mark Piper <mark.piper@colorado.edu>
+- Make package relocatable
+
 * Tue Aug 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
+
