@@ -13,5 +13,5 @@ before_script:
   - sudo cp config/macros.cmake /etc/rpm
 
 script:
-  - nosetests -v tests/test_check_dependencies.py
-  - nosetests -v tests/test_build_rpm.py
+#  - nosetests -v tests/test_check_dependencies.py
+#  - nosetests -v tests/test_build_rpm.py
