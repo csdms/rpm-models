@@ -64,6 +64,16 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
+%post -n avulsion
+/sbin/ldconfig
+%postun -n avulsion
+/sbin/ldconfig
+
+%post -n plume
+/sbin/ldconfig
+%postun -n plume
+/sbin/ldconfig
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -268,7 +278,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/ew-2.0/utils/
 
 %changelog
-* Wed Aug 27 2014 Mark Piper <mark.piper@colorado.edu>
+* Thu Aug 28 2014 Mark Piper <mark.piper@colorado.edu>
 - Produce separate RPMs for avulsion and plume
 
 * Tue Aug 26 2014 Mark Piper <mark.piper@colorado.edu>
