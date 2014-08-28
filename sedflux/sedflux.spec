@@ -1,6 +1,6 @@
 Name:		sedflux
 Version:	%{_version}
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Basin-filling stratigraphic model
 Group:		Applications/Engineering
 License:	GPLv2
@@ -24,16 +24,27 @@ process-response models of disparate time and space resolutions
 communicate with one another to deliver multi grain sized sediment
 load across a continental margin.
 
-%package -n plume
-Summary:	Hypopycnal sediment plume
+%package -n avulsion
+Summary:	Stream avulsion model
 Group:		Applications/Engineering
+URL:            http://csdms.colorado.edu/wiki/Model:Avulsion
+
+%description -n avulsion
+Avulsion dictates the movement of rivermouths along a coastline 
+by modeling the changes of river channel angles through the 
+floodplain as a stochastic random walk process.
+
+%package -n plume
+Summary:        Hypopycnal sediment plume
+Group:          Applications/Engineering
 URL:            http://csdms.colorado.edu/wiki/Model:Plume
 
 %description -n plume
-Plume simulates the sediment transport and deposition of several grainsize 
-classes from a river mouth entering into a marine basin by creating a
-turbulent jet. The model forms a hypopycnal plume. The model allows for 
-plume deflection due to systematic currents or Coriolis force.
+Plume simulates the sediment transport and deposition of several 
+grainsize classes from a river mouth entering into a marine basin 
+by creating a turbulent jet. The model forms a hypopycnal plume. 
+The model allows for plume deflection due to systematic currents 
+or Coriolis force.
 
 %prep
 %setup -q
@@ -198,6 +209,35 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/sedflux3d.pc
 %{_libdir}/pkgconfig/utils.pc
 
+%files -n avulsion
+%defattr(-,root,root,-)
+%{_bindir}/avulsion
+%{_libdir}/libavulsion.so
+%{_libdir}/libbing.so
+%{_libdir}/libbio.so
+%{_libdir}/libbmiplume.so
+%{_libdir}/libcompact.so
+%{_libdir}/libdiffusion.so
+%{_libdir}/libfailure.so
+%{_libdir}/libflow.so
+%{_libdir}/libinflow.so
+%{_libdir}/libmuds.so
+%{_libdir}/libplume.so
+%{_libdir}/libquake.so
+%{_libdir}/libsakura.so
+%{_libdir}/libsedflux-2.0.so
+%{_libdir}/libsedflux.so
+%{_libdir}/libsquall.so
+%{_libdir}/libsubside.so
+%{_libdir}/libutils.so
+%{_libdir}/libxshore.so
+%{_libdir}/pkgconfig/avulsion.pc
+%{_libdir}/pkgconfig/sed.pc
+%{_libdir}/pkgconfig/utils.pc
+%{_includedir}/bmi_avulsion.h
+%{_includedir}/ew-2.0/avulsion*.h
+%{_includedir}/ew-2.0/utils/
+
 %files -n plume
 %defattr(-,root,root,-)
 %{_bindir}/plume
@@ -228,5 +268,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/ew-2.0/utils/
 
 %changelog
+* Wed Aug 27 2014 Mark Piper <mark.piper@colorado.edu>
+- Produce separate RPMs for avulsion and plume
+
 * Tue Aug 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
+
