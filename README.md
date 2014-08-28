@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/csdms/rpm-models.svg?branch=master)](https://travis-ci.org/csdms/rpm-models)
+[![Build Status](https://travis-ci.org/csdms/rpm_models.svg?branch=master)](https://travis-ci.org/csdms/rpm_models)
 
 rpm-models
 ==========
