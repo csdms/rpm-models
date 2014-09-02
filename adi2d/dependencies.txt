@@ -1,0 +1,4 @@
+# Packages required to build adi2d
+autoconf
+automake
+libtool
