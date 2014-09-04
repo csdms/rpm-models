@@ -42,7 +42,7 @@ step.
 %setup -q
 
 %build
-%cmake . %_cmake_lib_suffix64
+%cmake .
 make %{?_smp_mflags}
 
 %install
@@ -58,13 +58,14 @@ ctest
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+# Developer to fix install to /usr/lib.
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
 %{_includedir}/%{name}_bmi.h
-%{_libdir}/lib%{name}.so
+/usr/lib/lib%{name}.so 
 
 %changelog
-* Wed Sep 3 2014 Mark Piper <mark.piper@colorado.edu>
+* Thu Sep 4 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
 
