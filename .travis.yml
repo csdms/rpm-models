@@ -5,15 +5,14 @@ python:
 install: 
   - sudo apt-get install -qq rpm
   - bash .travis/install_packagebuilder.sh
-  - build_rpm --help
   - bash .travis/install_rpmdevtools.sh
-  - export PATH=$PATH:$HOME/rpmdevtools-6.8/
-  - ls $HOME/rpmdevtools-6.8/
+  - export PATH=$PATH:$PWD/rpmdevtools-6.8/
+  - ls $PWD/rpmdevtools-6.8/
 
 before_script:
   - sudo mkdir -p /etc/rpm
   - sudo cp config/macros.cmake /etc/rpm
 
 script:
-   - build_rpm hydrotrend
+   - build_rpm hydrotrend --local hydrotrend
 
