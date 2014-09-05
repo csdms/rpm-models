@@ -14,4 +14,4 @@ before_script:
 
 script:
    - build_rpm hydrotrend --local $PWD/hydrotrend
-   - ls $HOME/rpmbuild/RPMS
+   - ls $HOME/rpmbuild/RPMS/x86_64
