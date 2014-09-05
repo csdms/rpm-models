@@ -7,13 +7,10 @@ install:
   - bash .travis/install_packagebuilder.sh
   - bash .travis/install_rpmdevtools.sh
   - export PATH=$PATH:$PWD/rpmdevtools-6.8/
-  - ls $PWD
-  - ls $HOME
 
 before_script:
   - sudo mkdir -p /etc/rpm
   - sudo cp config/macros.cmake /etc/rpm
 
 script:
-   - build_rpm hydrotrend
-
+   - build_rpm hydrotrend --local $PWD/hydrotrend
