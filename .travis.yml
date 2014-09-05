@@ -10,10 +10,8 @@ install:
   - wget https://fedorahosted.org/releases/r/p/rpmdevtools/rpmdevtools-6.8.tar.bz2
   - tar -jxf rpmdevtools-6.8.tar.bz2
   - export PATH=$PATH:$PWD/rpmdevtools-6.8/
-  - svn co https://github.com/csdms/packagebuilder
-  - cd packagebuilder
-  - python setup.py install
-  - build_rpm --help
+  - svn export https://github.com/csdms/packagebuilder/trunk packagebuilder
+  - cd packagebuilder && python setup.py install
 
 before_script:
   - sudo mkdir -p /etc/rpm
