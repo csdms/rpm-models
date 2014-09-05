@@ -15,5 +15,5 @@ before_script:
   - sudo cp config/macros.cmake /etc/rpm
 
 script:
-   - build_rpm hydrotrend --local $PWD/hydrotrend
+   - build_rpm hydrotrend
 
