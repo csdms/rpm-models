@@ -5,8 +5,6 @@ rpm_models
 
 Recipes for building binary and source RPMs for CSDMS models.
 
-The repository 
+Use the Python package in 
 [csdms/packagebuilder](https://github.com/csdms/packagebuilder)
-has a Python package 
-that uses these recipes to build the RPMs.
-
+to build the RPMs.
