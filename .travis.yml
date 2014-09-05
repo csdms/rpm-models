@@ -5,8 +5,10 @@ python:
 install: 
   - sudo apt-get install -qq rpm
   - bash .travis/install_packagebuilder.sh
+  - build_rpm --help
   - bash .travis/install_rpmdevtools.sh
   - export PATH=$PATH:$HOME/rpmdevtools-6.8/
+  - ls $HOME/rpmdevtools-6.8/
 
 before_script:
   - sudo mkdir -p /etc/rpm
