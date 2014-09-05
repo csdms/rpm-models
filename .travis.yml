@@ -11,7 +11,7 @@ install:
   - tar -jxf rpmdevtools-6.8.tar.bz2
   - export PATH=$PATH:$PWD/rpmdevtools-6.8/
   - svn export https://github.com/csdms/packagebuilder/trunk packagebuilder
-  - cd packagebuilder && python setup.py install
+  - python packagebuilder/setup.py install
 
 before_script:
   - sudo mkdir -p /etc/rpm
