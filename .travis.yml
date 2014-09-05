@@ -2,18 +2,10 @@ language: python
 python:
   - "2.7"
 
-before_install: 
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq rpm
-
 install: 
-  - wget https://fedorahosted.org/releases/r/p/rpmdevtools/rpmdevtools-6.8.tar.bz2
-  - tar -jxf rpmdevtools-6.8.tar.bz2
-  - export PATH=$PATH:$PWD/rpmdevtools-6.8/
-  - svn export https://github.com/csdms/packagebuilder/trunk packagebuilder
-  - cd packagebuilder
-  - python setup.py install
-  - cd
+  - sudo apt-get install -qq rpm
+  - bash .travis/install_packagebuilder.sh
+  - bash .travis/install_rpmdevtools.sh
 
 before_script:
   - sudo mkdir -p /etc/rpm
