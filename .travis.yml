@@ -13,7 +13,9 @@ before_script:
   - sudo cp config/macros.cmake /etc/rpm
 
 script:
+   - build_rpm adi-2d --local $PWD/adi-2d
+   - build_rpm aquatellus --local $PWD/aquatellus
+   - build_rpm cem --local $PWD/cem
+   - build_rpm child --local $PWD/child
    - build_rpm hydrotrend --local $PWD/hydrotrend
-   - rpm -ivph $HOME/rpmbuild/RPMS/x86_64/hydrotrend-*.rpm
-   - hydrotrend --version
-   - rpm -e hydrotrend
+   - build_rpm sedflux --local $PWD/sedflux
