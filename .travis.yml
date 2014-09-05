@@ -2,17 +2,23 @@ language: python
 python:
   - "2.7"
 
-install: 
+before_install: 
+  - sudo apt-get update -qq
   - sudo apt-get install -qq rpm
+
+install: 
   - wget https://fedorahosted.org/releases/r/p/rpmdevtools/rpmdevtools-6.8.tar.bz2
   - tar -jxf rpmdevtools-6.8.tar.bz2
   - export PATH=$PATH:$PWD/rpmdevtools-6.8/
+  - svn co https://github.com/csdms/packagebuilder
+  - cd packagebuilder
+  - python setup.py install
+  - build_rpm --help
 
 before_script:
   - sudo mkdir -p /etc/rpm
   - sudo cp config/macros.cmake /etc/rpm
 
 script:
-   - nosetests
-#  - nosetests -v tests/test_check_dependencies.py
-#  - nosetests -v tests/test_build_rpm.py
+   - build_rpm hydrotrend
+
