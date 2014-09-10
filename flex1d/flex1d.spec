@@ -30,6 +30,8 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
+mkdir -p %{buildroot}%{_datadir}/%{name}
+cp load1dandes %{buildroot}%{_datadir}/%{name} # patch?
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -41,7 +43,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc AUTHORS ChangeLog COPYING INSTALL NEWS README
 %{_bindir}/%{name}
-#%{_datadir}/%{name}/load1dandes
+%{_datadir}/%{name}/load1dandes
 
 %changelog
 * Tue Sep 9 2014 Mark Piper <mark.piper@colorado.edu>
