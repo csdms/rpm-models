@@ -15,6 +15,7 @@ before_script:
 script:
    - build_rpm adi-2d --local $PWD/adi-2d
    - build_rpm aquatellus --local $PWD/aquatellus
+   - build_rpm flex1d --local $PWD/flex1d
    - build_rpm cem --local $PWD/cem
    - build_rpm child --local $PWD/child
    - build_rpm hydrotrend --local $PWD/hydrotrend
