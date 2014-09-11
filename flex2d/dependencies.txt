@@ -1,0 +1,4 @@
+# Packages required to build flex1d
+autoconf
+automake
+libtool
