@@ -1,0 +1,11 @@
+Index: Makefile
+===================================================================
+--- Makefile	(revision 5)
++++ Makefile	(working copy)
+@@ -1,5 +1,5 @@
+ 
+-GFORTRAN=gfortran
++GFORTRAN=${FC}
+ FFLAGS=
+ PROG=2dflowvel
+ VERSION=0.1
