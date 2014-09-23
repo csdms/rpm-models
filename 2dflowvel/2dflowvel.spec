@@ -8,6 +8,8 @@ URL:		http://csdms.colorado.edu/wiki/Model:2DFLOWVEL
 # The 2DFLOWVEL source can be checked out from the CSDMS Trac site:
 # $ svn co https://csdms.colorado.edu/svn/2dflowvel/trunk
 Source0:	%{name}-%{version}.tar.gz
+# This patch replaces explicit "gfortran" with $FC.
+Patch0:		%{name}-fc.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 Prefix:		/usr
 
@@ -21,6 +23,7 @@ model.
 
 %prep
 %setup -q
+%patch0
 
 %build
 make %{?_smp_mflags}
