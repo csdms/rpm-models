@@ -1,0 +1,11 @@
+Index: Makefile
+===================================================================
+--- Makefile	(revision 2)
++++ Makefile	(working copy)
+@@ -1,5 +1,5 @@
+ 
+-GFORTRAN=gfortran
++GFORTRAN=${FC}
+ FFLAGS=-Wall
+ PROG=storm
+ VERSION=0.1
