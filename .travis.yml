@@ -3,7 +3,7 @@ python:
   - "2.7"
 
 install: 
-  - sudo apt-get install -qq rpm gcc-gfortran
+  - sudo apt-get install -qq rpm gfortran
   - bash .travis/install_packagebuilder.sh
   - bash .travis/install_rpmdevtools.sh
   - export PATH=$PATH:$PWD/rpmdevtools-6.8/
