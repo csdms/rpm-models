@@ -27,10 +27,11 @@ Storm computes the windfield for a cyclone.
 %build
 make %{?_smp_mflags}
 
+# No install target given; install manually.
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}%{_bindir}
-cp %{name} %{buildroot}%{_bindir} # patch?
+install -d -m755 %{buildroot}%{_bindir}
+install -m755 %{name} %{buildroot}%{_bindir}/ # patch?
 
 %clean
 rm -rf %{buildroot}

@@ -30,8 +30,8 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
-mkdir -p %{buildroot}%{_datadir}/%{name}
-cp load2dandes %{buildroot}%{_datadir}/%{name} # patch?
+install -d -m755 %{buildroot}%{_datadir}/%{name}
+install -m755 load2dandes %{buildroot}%{_datadir}/%{name}/ # patch?
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -46,5 +46,5 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/load2dandes
 
 %changelog
-* Thu Sep 11 2014 Mark Piper <mark.piper@colorado.edu>
+* Tue Sep 23 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
