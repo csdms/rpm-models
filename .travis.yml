@@ -15,7 +15,7 @@ before_script:
 
 script:
    - build_rpm 2dflowvel --local $PWD
-   - build_rpm adi-2d --local $PWD-2d
+   - build_rpm adi-2d --local $PWD
    - build_rpm aquatellus --local $PWD
    - build_rpm cem --local $PWD
    - build_rpm child --local $PWD
