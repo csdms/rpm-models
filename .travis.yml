@@ -13,12 +13,15 @@ before_script:
   - sudo cp config/macros.cmake /etc/rpm
 
 script:
+   - build_rpm 2dflowvel --local $PWD/2dflowvel
    - build_rpm adi-2d --local $PWD/adi-2d
    - build_rpm aquatellus --local $PWD/aquatellus
+   - build_rpm cem --local $PWD/cem
+   - build_rpm child --local $PWD/child
    - build_rpm flex1d --local $PWD/flex1d
    - build_rpm flex2d --local $PWD/flex2d
    - build_rpm flex2d-adi --local $PWD/flex2d-adi
-   - build_rpm cem --local $PWD/cem
-   - build_rpm child --local $PWD/child
    - build_rpm hydrotrend --local $PWD/hydrotrend
+   - build_rpm marssim --local $PWD/marssim
    - build_rpm sedflux --local $PWD/sedflux
+   - build_rpm storm --local $PWD/storm
