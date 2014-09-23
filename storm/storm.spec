@@ -29,6 +29,8 @@ make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}%{_bindir}
+cp %{name} %{buildroot}%{_bindir} # patch?
 
 %clean
 rm -rf %{buildroot}
