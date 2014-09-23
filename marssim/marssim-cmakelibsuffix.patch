@@ -1,0 +1,23 @@
+Index: src/CMakeLists.txt
+===================================================================
+--- src/CMakeLists.txt	(revision 9)
++++ src/CMakeLists.txt	(working copy)
+@@ -6,6 +6,9 @@
+ 
+ set (CMAKE_Fortran_FLAGS -ffree-line-length-none)
+ 
++# Allow user-specified lib directory. Call, e.g., with -DLIB_SUFFIX=64.
++set (LIB_DIR lib${LIB_SUFFIX})
++
+ set (marssim_srcs
+      program_global_variables.f90
+      alternate_read_and_write.f90
+@@ -37,7 +40,7 @@
+ target_link_libraries (marssim m)
+ 
+ install (TARGETS run_${MODEL} RUNTIME DESTINATION bin)
+-install (TARGETS ${MODEL} DESTINATION lib)
++install (TARGETS ${MODEL} DESTINATION ${LIB_DIR})
+ install (FILES
+ 	${PROJECT_BINARY_DIR}/src/accretion_globals.mod
+         ${PROJECT_BINARY_DIR}/src/area_globals.mod
