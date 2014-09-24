@@ -1,6 +1,8 @@
+%define docdir %{_datadir}/doc
+
 Name:		hydrotrend
 Version:	%{_version}
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	A hydrological water balance and transport model
 Group:		Applications/Engineering
 License:	GPLv3
@@ -11,7 +13,7 @@ Source0:	%{name}-%{version}.tar.gz
 # This patch allows the -DLIB_SUFFIX option to CMake.
 Patch0:		%{name}-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%{_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
@@ -30,8 +32,11 @@ model that simulates water discharge and sediment load at a river outlet.
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
+install -d -m755 %{buildroot}%{docdir}/%{name}-%{version}
+install -m755 README %{buildroot}%{docdir}/%{name}-%{version}/
+install -m755 FLOWCHART %{buildroot}%{docdir}/%{name}-%{version}/
 
 %check
 ctest
@@ -40,11 +45,12 @@ ctest
 %postun -p /sbin/ldconfig
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc FLOWCHART NEWS README
+%{docdir}/%{name}-%{version}/README
+%{docdir}/%{name}-%{version}/FLOWCHART
 %{_bindir}/%{name}
 %{_includedir}/%{name}_cli.h
 %{_includedir}/bmi_%{name}.h
@@ -54,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/output/*
 
 %changelog
+* Wed Sep 24 2014 Mark Piper <mark.piper@colorado.edu>
+- Configure for CSDMS custom install location (/usr/local/csdms)
+
 * Thu Aug 28 2014 Mark Piper <mark.piper@colorado.edu>
 - Make package relocatable
 
