@@ -1,0 +1,4 @@
+# Packages required to build ltrans
+gcc-gfortran
+netcdf
+netcdf-devel
