@@ -17,12 +17,12 @@ script:
    - build_rpm 2dflowvel --local $PWD
    - build_rpm adi-2d --local $PWD
    - build_rpm aquatellus --local $PWD
-   - build_rpm cem --local $PWD
+   - build_rpm cem --local $PWD --prefix=/usr
    - build_rpm child --local $PWD
    - build_rpm flex1d --local $PWD
    - build_rpm flex2d --local $PWD
    - build_rpm flex2d-adi --local $PWD
-   - build_rpm hydrotrend --local $PWD
+   - build_rpm hydrotrend --local $PWD --prefix=/usr
    - build_rpm marssim --local $PWD
    - build_rpm sedflux --local $PWD
    - build_rpm storm --local $PWD

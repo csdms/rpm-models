@@ -56,8 +56,8 @@ rm -rf %{buildroot}
 %{_includedir}/bmi_%{name}.h
 %{_libdir}/lib%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
-%{_datadir}/%{name}/input/*
-%{_datadir}/%{name}/output/*
+%{_datadir}/%{name}/input/
+%{_datadir}/%{name}/output/
 
 %changelog
 * Wed Sep 24 2014 Mark Piper <mark.piper@colorado.edu>
