@@ -1,6 +1,6 @@
 Name:		aquatellus
 Version:	%{_version}
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Fluvial-dominated delta sedimentation model
 Group:		Applications/Engineering
 License:	Other
@@ -9,7 +9,7 @@ URL:		http://csdms.colorado.edu/wiki/Model:AquaTellUs
 # $ svn co https://csdms.colorado.edu/svn/aquatellus/trunk
 Source0:	%{name}-%{version}.tar.gz
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%{_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
@@ -46,8 +46,8 @@ step.
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -56,16 +56,18 @@ make install DESTDIR=$RPM_BUILD_ROOT
 ctest
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-# Developer to fix install to /usr/lib.
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
 %{_includedir}/%{name}_bmi.h
-/usr/lib/lib%{name}.so 
+%{_prefix}/lib/lib%{name}.so 
 
 %changelog
+* Fri Sep 26 2014 Mark Piper <mark.piper@colorado.edu>
+- Configure for CSDMS custom install location (/usr/local/csdms)
+
 * Thu Sep 4 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
 

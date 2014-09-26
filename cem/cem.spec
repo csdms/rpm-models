@@ -1,9 +1,10 @@
-%define _waves waves
-%define _deltas deltas
+%define waves waves
+%define deltas deltas
+%define docdir %{_datadir}/doc
 
 Name:		cem
 Version:	%{_version}
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	The Coastline Evolution Model from Duke University
 Group:		Applications/Engineering
 License:	BSD
@@ -16,7 +17,7 @@ Patch0:		cem-cmakecxx.patch
 # Patch1 allows the -DLIB_SUFFIX option to CMake.
 Patch1:		cem-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%{_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
@@ -50,8 +51,15 @@ evolution through beach nourishment or hard structures.
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
+install -d -m755 %{buildroot}%{docdir}/%{name}-%{version}
+install -m664 AUTHORS %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 ChangeLog %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 COPYING %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 INSTALL %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 NEWS %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 README %{buildroot}%{docdir}/%{name}-%{version}/
 
 %check
 ctest
@@ -60,28 +68,30 @@ ctest
 %postun -p /sbin/ldconfig
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README
-%{_bindir}/%{_deltas}
-%{_bindir}/%{_waves}
+%{docdir}/%{name}-%{version}/
+%{_bindir}/%{deltas}
+%{_bindir}/%{waves}
 %{_includedir}/bmi_%{name}.h
-%{_includedir}/bmi_%{_waves}.h
-%{_includedir}/%{_deltas}_api.h
-%{_includedir}/%{_deltas}_cli.h
-%{_includedir}/%{_waves}_cli.h
+%{_includedir}/bmi_%{waves}.h
+%{_includedir}/%{deltas}_api.h
+%{_includedir}/%{deltas}_cli.h
+%{_includedir}/%{waves}_cli.h
 %{_libdir}/libbmi%{name}.so
-%{_libdir}/libbmi%{_waves}.so
-%{_libdir}/pkgconfig/%{_deltas}.pc
-%{_libdir}/pkgconfig/%{_waves}.pc
-%{_datadir}/%{_deltas}/output/*
+%{_libdir}/libbmi%{waves}.so
+%{_libdir}/pkgconfig/%{deltas}.pc
+%{_libdir}/pkgconfig/%{waves}.pc
+%{_datadir}/%{deltas}/output/
 
 %changelog
+* Fri Sep 26 2014 Mark Piper <mark.piper@colorado.edu>
+- Configure for CSDMS custom install location (/usr/local/csdms)
+
 * Thu Aug 28 2014 Mark Piper <mark.piper@colorado.edu>
 - Make package relocatable
 
 * Tue Aug 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
-
