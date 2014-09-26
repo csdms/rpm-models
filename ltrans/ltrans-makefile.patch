@@ -1,0 +1,51 @@
+Index: makefile
+===================================================================
+--- makefile	(revision 3)
++++ makefile	(working copy)
+@@ -13,7 +13,7 @@
+ #    Set compiler.
+ #------------------------------------------------
+ 
+-FC = gfortran
++#FC = gfortran
+ 
+ #------------------------------------------------
+ #    Set NetCDF Library Locations.
+@@ -23,10 +23,10 @@
+ #        HDF5 :=
+ #------------------------------------------------
+ 
+-NETCDF_INCDIR = /usr/local/netcdf-4.1.3/include
+-NETCDF_LIBDIR = /usr/local/netcdf-4.1.3/lib
++#NETCDF_INCDIR = /usr/local/netcdf-4.1.3/include
++#NETCDF_LIBDIR = /usr/local/netcdf-4.1.3/lib
+ 
+-HDF5 := on
++HDF5 :=
+ 
+ #------------------------------------------------
+ #    Set compiler flags.
+@@ -49,13 +49,14 @@
+ ifdef HDF5
+ 	LIBS      = -L$(NETCDF_LIBDIR) -lnetcdf -lnetcdff -L/usr/local/hdf5-1.8.7/lib -lhdf5_hl -lhdf5 -lcurl
+ else
+-	LIBS      = -L$(NETCDF_LIBDIR) -lnetcdf
++	LIBS      = -L$(NETCDF_LIBDIR) -lnetcdf -lnetcdff
+ endif
+ 
++NAME=ltrans
+ 
+ LTRANS : $(OBJS)
+ 	@echo "  Compiling LTRANS.f90"
+-	@$(FC) $(FFLAGS) -o LTRANS LTRANS.f90 $(OBJS) $(LIBS)
++	@$(FC) $(FFLAGS) -o $(NAME) LTRANS.f90 $(OBJS) $(LIBS)
+ 	@\rm *.o *.mod
+ 	@echo "  "
+ 	@echo "  Compilation Successfully Completed"
+@@ -66,5 +67,5 @@
+ 	@$(FC) $(FFLAGS) -c $<
+ 
+ clean:
+-	\rm *.o *.mod LTRANS
++	\rm *.o *.mod $(NAME)
+ 
