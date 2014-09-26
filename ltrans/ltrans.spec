@@ -8,8 +8,10 @@ URL:		http://csdms.colorado.edu/wiki/Model:LTRANS
 # The LTRANS source can be checked out from the CSDMS Trac site:
 # $ svn co https://csdms.colorado.edu/svn/ltrans/trunk
 Source0:	%{name}-%{version}.tar.gz
+# This patch allows FC, NETCDF_INCDIR and NETCDF_LIBDIR env variables.
+Patch0:		%{name}-makefile.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%{_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
@@ -30,13 +32,20 @@ included.
 
 %prep
 %setup -q
+%patch0
 
 %build
 make # deparallelize
 
+# No install target given; install manually.
 %install
 rm -rf %{buildroot}
-make install DEST_DIR=%{buildroot}
+install -d -m755 %{buildroot}%{_bindir}
+install -m755 %{name} %{buildroot}%{_bindir}/
+install -d -m755 %{buildroot}%{_includedir}
+install -m755 LTRANS.h %{buildroot}%{_includedir}/
+install -d -m755 %{buildroot}%{_datadir}
+install -m755 LTRANS.data %{buildroot}%{_datadir}/
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -46,10 +55,11 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-#%{_bindir}/run_%{name}
-#%{_libdir}/lib%{name}.so
-#%{_datadir}/
+%{_bindir}/%{name}
+%{_includedir}/
+%{_datadir}/
 
 %changelog
-* Wed Sep 24 2014 Mark Piper <mark.piper@colorado.edu>
+* Fri Sep 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
+- Configure for CSDMS custom install location (/usr/local/csdms)
