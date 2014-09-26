@@ -11,7 +11,7 @@ Source0:	%{name}-%{version}.tar.gz
 # This patch allows the -DLIB_SUFFIX option to CMake.
 Patch0:		%{name}-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%{_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
@@ -55,8 +55,8 @@ or Coriolis force.
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
 
 %check
 #ctest
@@ -75,7 +75,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 /sbin/ldconfig
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)

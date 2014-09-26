@@ -1,3 +1,5 @@
+%define docdir %{_datadir}/doc
+
 Name:		flex1d
 Version:	%{_version}
 Release:	1%{?dist}
@@ -9,7 +11,7 @@ URL:		http://csdms.colorado.edu/wiki/Model:Flex1D
 # $ svn co https://csdms.colorado.edu/svn/flex1d/trunk
 Source0:	%{name}-%{version}.tar.gz
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%{_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
@@ -32,6 +34,13 @@ rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -d -m755 %{buildroot}%{_datadir}/%{name}
 install -m755 load1dandes %{buildroot}%{_datadir}/%{name}/ # patch?
+install -d -m755 %{buildroot}%{docdir}/%{name}-%{version}
+install -m664 AUTHORS %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 ChangeLog %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 COPYING %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 INSTALL %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 NEWS %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 README %{buildroot}%{docdir}/%{name}-%{version}/
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -41,10 +50,11 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README
+%{docdir}/%{name}-%{version}/
 %{_bindir}/%{name}
 %{_datadir}/%{name}/load1dandes
 
 %changelog
-* Tue Sep 23 2014 Mark Piper <mark.piper@colorado.edu>
+* Fri Sep 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
+- Configure for CSDMS custom install location (/usr/local/csdms)

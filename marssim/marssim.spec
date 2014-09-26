@@ -11,7 +11,7 @@ Source0:	%{name}-%{version}.tar.gz
 # This patch allows the -DLIB_SUFFIX option to CMake.
 Patch0:		%{name}-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
@@ -55,5 +55,7 @@ rm -rf %{buildroot}
 %{_datadir}/
 
 %changelog
-* Tue Sep 23 2014 Mark Piper <mark.piper@colorado.edu>
+* Fri Sep 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
+- Configure for CSDMS custom install location (/usr/local/csdms)
+

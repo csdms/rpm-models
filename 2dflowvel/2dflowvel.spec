@@ -11,7 +11,7 @@ Source0:	%{name}-%{version}.tar.gz
 # This patch replaces explicit "gfortran" with $FC.
 Patch0:		%{name}-fc.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%{_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}

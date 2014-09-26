@@ -11,7 +11,7 @@ Source0:	%{name}-%{version}.tar.gz
 # This patch replaces explicit "gfortran" with $FC.
 Patch0:		%{name}-fc.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%{_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
@@ -41,5 +41,7 @@ rm -rf %{buildroot}
 %{_bindir}/%{name}
 
 %changelog
-* Mon Sep 22 2014 Mark Piper <mark.piper@colorado.edu>
+* Fri Sep 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
+- Configure for CSDMS custom install location (/usr/local/csdms)
+

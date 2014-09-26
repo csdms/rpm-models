@@ -1,6 +1,6 @@
 Name:		child
 Version:	%{_version}
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	A landscape evolution model
 Group:		Applications/Engineering
 License:	GPLv2
@@ -11,7 +11,7 @@ Source0:	%{name}-%{version}.tar.gz
 # This patch allows the -DLIB_SUFFIX option to CMake.
 Patch0:		%{name}-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
-Prefix:		/usr
+Prefix:		%{_prefix}
 
 %if 0%{?_buildrequires:1}
 BuildRequires:	%{_buildrequires}
@@ -30,8 +30,8 @@ by fluvial and hillslope erosion and sediment transport.
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
 
 %check
 ctest
@@ -40,7 +40,7 @@ ctest
 %postun -p /sbin/ldconfig
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
@@ -101,6 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Fri Sep 26 2014 Mark Piper <mark.piper@colorado.edu>
+- Configure for CSDMS custom install location (/usr/local/csdms)
+
 * Thu Aug 28 2014 Mark Piper <mark.piper@colorado.edu>
 - Make package relocatable
 
