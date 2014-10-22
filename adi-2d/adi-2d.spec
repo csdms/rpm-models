@@ -33,15 +33,8 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -d -m755 %{buildroot}%{docdir}/%{name}-%{version}
-install -m664 AUTHORS %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 ChangeLog %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 COPYING %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 INSTALL %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 NEWS %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 README %{buildroot}%{docdir}/%{name}-%{version}/
-
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+install -m664 AUTHORS ChangeLog COPYING INSTALL NEWS README \
+	%{buildroot}%{docdir}/%{name}-%{version}/
 
 %clean
 rm -rf %{buildroot}
