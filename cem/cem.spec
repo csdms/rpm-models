@@ -1,10 +1,11 @@
 %define waves waves
 %define deltas deltas
 %define docdir %{_datadir}/doc
+%define lib32dir %{_prefix}/lib
 
 Name:		cem
 Version:	%{_version}
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	The Coastline Evolution Model from Duke University
 Group:		Applications/Engineering
 License:	BSD
@@ -13,9 +14,9 @@ URL:		http://csdms.colorado.edu/wiki/Model:CEM
 # $ svn co https://csdms.colorado.edu/svn/cem/trunk
 Source0:	%{name}-%{version}.tar.gz
 # Patch0 turns off use of g++ in building CEM.
-Patch0:		cem-cmakecxx.patch
+Patch0:		%{name}-cmakecxx.patch
 # Patch1 allows the -DLIB_SUFFIX option to CMake.
-Patch1:		cem-cmakelibsuffix.patch
+# Patch1:		%{name}-cmakelibsuffix.patch
 BuildRoot:	%{_topdir}/BUILDROOT/%{name}-%{version}-%{release}
 Prefix:		%{_prefix}
 
@@ -44,22 +45,18 @@ evolution through beach nourishment or hard structures.
 %prep
 %setup -q
 %patch0
-%patch1
+#%patch1
 
 %build
-%cmake . %_cmake_lib_suffix64
+%cmake .
 make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -d -m755 %{buildroot}%{docdir}/%{name}-%{version}
-install -m664 AUTHORS %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 ChangeLog %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 COPYING %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 INSTALL %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 NEWS %{buildroot}%{docdir}/%{name}-%{version}/
-install -m664 README %{buildroot}%{docdir}/%{name}-%{version}/
+install -m664 AUTHORS ChangeLog COPYING INSTALL NEWS README \
+	%{buildroot}%{docdir}/%{name}-%{version}/
 
 %check
 ctest
@@ -72,21 +69,15 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{docdir}/%{name}-%{version}/
-%{_bindir}/%{deltas}
-%{_bindir}/%{waves}
-%{_includedir}/bmi_%{name}.h
-%{_includedir}/bmi_%{waves}.h
-%{_includedir}/%{deltas}_api.h
-%{_includedir}/%{deltas}_cli.h
-%{_includedir}/%{waves}_cli.h
-%{_libdir}/libbmi%{name}.so
-%{_libdir}/libbmi%{waves}.so
-%{_libdir}/pkgconfig/%{deltas}.pc
-%{_libdir}/pkgconfig/%{waves}.pc
-%{_datadir}/%{deltas}/output/
+%{_bindir}/
+%{_includedir}/
+%{lib32dir}/
+%{_datadir}/
 
 %changelog
+* Wed Oct 22 2014 Mark Piper <mark.piper@colorado.edu> - %{_version}-4
+- Install all CSDMS software into %lib32dir
+
 * Fri Sep 26 2014 Mark Piper <mark.piper@colorado.edu>
 - Configure for CSDMS custom install location (/usr/local/csdms)
 
