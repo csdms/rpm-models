@@ -1,3 +1,5 @@
+%define lib32dir %{_prefix}/lib
+
 Name:		aquatellus
 Version:	%{_version}
 Release:	2%{?dist}
@@ -60,9 +62,9 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/%{name}
-%{_includedir}/%{name}_bmi.h
-%{_prefix}/lib/lib%{name}.so 
+%{_bindir}/
+%{_includedir}/
+%{lib32dir}/
 
 %changelog
 * Fri Sep 26 2014 Mark Piper <mark.piper@colorado.edu>
@@ -70,4 +72,3 @@ rm -rf %{buildroot}
 
 * Thu Sep 4 2014 Mark Piper <mark.piper@colorado.edu>
 - Initial version of the package
-
