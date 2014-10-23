@@ -9,17 +9,17 @@ Recipes for building binary and source RPMs for CSDMS models.
 
 These recipes are designed for Linux distros
 that are compatible with Red Hat Enterprise Linux
-(e.g., CentOS, Fedora).
+(e.g., CentOS, Fedora, SUSE).
 To install CSDMS models on Mac OS X,
 please see the
 [csdms/homebrew-models](https://github.com/csdms/homebrew-models)
 project.
 
-To build and install the tools in this project,
+To build and install the tools in this repository,
 the mandatory and default packages in the 
 "Development Tools" group (such as `make`, `gcc`, and `rpm-build`) 
 are required,
-as well as the optional `cmake`, `git` and `rpmdevtools` packages.
+as well as `cmake`, `git` and `rpmdevtools`.
 Install them with:
 ```bash
 $ sudo yum groupinstall "development tools"
@@ -39,16 +39,15 @@ $ sudo python setup.py install
 This installs the script `build_rpm`,
 which can be used to build the RPMs for a model.
 
-To separate the CSDMS software stack from other programs,
-it's designed to be installed 
+To separate CSDMS software from other programs,
+the tools in this repository are designed to be installed 
 in the directory **/usr/local/csdms**,
 although this is optional.
-Set the environment variable `CSDMS_DIR`:
+Set the environment variable `CSDMS_DIR` to the installation path on your machine:
 ```bash
 $ export CSDMS_DIR=/usr/local/csdms
 ```
-to the installation path on your machine.
-`CSDMS_DIR` is used by several recipes in this project.
+`CSDMS_DIR` is used by several recipes in this repository.
 
 The `QA_RPATHS` environment variable may also need to be set:
 ```bash
@@ -81,10 +80,12 @@ on your machine.
 
 ## Installation
 
-Install the package from the binary RPM with `rpm`.
+Install the package from the binary RPM with `rpm` or `yum`.
 For example:
 ```bash
 $ sudo rpm -ivh hydrotrend-head-1.el6.x86_64.rpm
+$ # or...
+$ sudo yum install hydrotrend-head-1.el6.x86_64.rpm
 ```
 
 Check that the package was installed successfully:
@@ -95,7 +96,7 @@ HydroTrend version 3.0.5
 
 ## The CSDMS repository
 
-Built versions of all of the models in this project are available 
+Built versions of all of the models listed here are available 
 from the CSDMS repository, 
 [http://csdms.colorado.edu/repo/](http://csdms.colorado.edu/repo/).
 See the [README.md](http://csdms.colorado.edu/repo/README.md) file
@@ -110,7 +111,7 @@ is an NSF-funded project that supports a diverse community
 of users and developers
 of earth and ocean system models. 
 CSDMS develops, integrates, archives and disseminates
-earth system models and tools to an international community
+models and tools to an international community
 with the goal of building the frameworks necessary
 to model the earth system.
 Modelers use CSDMS for access
