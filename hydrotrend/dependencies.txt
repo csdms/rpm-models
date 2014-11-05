@@ -1,2 +1,2 @@
 # Packages required to build hydrotrend
-cmake
+cmake >= 2.6

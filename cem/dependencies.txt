@@ -1,5 +1,5 @@
 # Packages required to build CEM.
-cmake
+cmake >= 2.6
 ncurses-devel
 glib2
 glib2-devel

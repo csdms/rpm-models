@@ -1,2 +1,2 @@
 # Packages required to build child
-cmake
+cmake >= 2.8

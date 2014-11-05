@@ -1,2 +1,2 @@
 # Packages required to build marssim
-cmake
+cmake >= 2.6
